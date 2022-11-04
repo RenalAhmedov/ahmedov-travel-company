@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace AhmedovTravel.Data
+namespace AhmedovTravel.Infrastrucutre.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
