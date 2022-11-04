@@ -1,4 +1,3 @@
-using AhmedovTravel.Infrastrucutre;
 using AhmedovTravel.Infrastrucutre.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
