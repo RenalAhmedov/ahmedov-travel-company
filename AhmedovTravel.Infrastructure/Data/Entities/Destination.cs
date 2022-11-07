@@ -1,5 +1,6 @@
 ﻿using AhmedovTravel.Infrastructure.Data.Entities.Enums;
 using AhmedovTravel.Infrastructure.DataConstants;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,7 +9,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     public class Destination
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Required]
         [MaxLength(DestinationConstants.TitleMaxLength)]
@@ -20,6 +21,8 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public RatingEnum Rating { get; set; }
 
         [Required]
+        [Column(TypeName = "money")]
+        [Precision(18, 2)]
         [Range(DestinationConstants.PriceMinAmount, DestinationConstants.PriceMaxAmount)]
         public decimal Price { get; set; }
 

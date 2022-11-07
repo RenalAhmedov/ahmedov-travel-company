@@ -26,6 +26,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 
         public ICollection<Hotel> Hotels { get; set; }
 
+        [Required]
         public bool isActive { get; set; }
     }
 }
