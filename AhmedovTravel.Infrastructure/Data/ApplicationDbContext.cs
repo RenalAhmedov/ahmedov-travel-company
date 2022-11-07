@@ -22,18 +22,25 @@ namespace AhmedovTravel.Infrastrucutre.Data
             builder.Entity<UserDestination>()
                   .HasKey(ud => new { ud.UserId, ud.DestinationId });
 
-            builder.Entity<User>()
-                .Property(u => u.UserName)
-                .HasMaxLength(20)
-                .IsRequired();
+ 
+            //Delete behaviour setup
+            builder.Entity<UserDestination>()
+                .HasOne(ud => ud.User)
+                .WithMany(u => u.UserDestinations)
+                .HasForeignKey(ui => ui.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<User>()
-               .Property(u => u.Email)
-               .HasMaxLength(60)
-               .IsRequired();
+            builder.Entity<UserDestination>()
+                .HasOne(ud => ud.Destination)
+                .WithMany(t => t.UsersDestinations)
+                .HasForeignKey(di => di.DestinationId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-
-
+            builder.Entity<Town>()
+                .HasOne(t => t.Hotel)
+                .WithMany(t => t.TownHotels)
+                .HasForeignKey(t => t.HotelId)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
 

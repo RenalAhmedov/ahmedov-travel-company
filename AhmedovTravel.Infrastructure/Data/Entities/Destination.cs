@@ -35,7 +35,9 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [ForeignKey(nameof(TownId))]
         public Town? Town { get; set; }
 
-        public ICollection<UserDestination> UserDestinations { get; set; }
+        public ICollection<Town>? Towns { get; set; }
+
+        public ICollection<UserDestination>? UsersDestinations { get; set; }
 
         [Required]
         public bool IsActive { get; set; }

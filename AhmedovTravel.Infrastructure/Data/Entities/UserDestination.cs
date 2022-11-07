@@ -20,7 +20,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public Guid DestinationId { get; set; }
 
         [ForeignKey(nameof(DestinationId))]
-        public Destination Destination { get; set; }
+        public Destination? Destination { get; set; }
 
         [Required]
         public bool IsActive { get; set; }
