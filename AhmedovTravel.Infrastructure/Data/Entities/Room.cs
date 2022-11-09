@@ -28,6 +28,8 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Precision(18,2)]
         public decimal PricePerNight { get; set; }
 
+        public ICollection<Hotel> HotelRooms { get; set; } = new List<Hotel>();
+
         [Required]
         public bool IsActive { get; set; }
     }

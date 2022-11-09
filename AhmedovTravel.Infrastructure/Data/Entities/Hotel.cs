@@ -26,9 +26,9 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [ForeignKey(nameof(RoomId))]
         public Room? Room { get; set; }
 
-        public ICollection<Room> Rooms { get; set; }
+        public ICollection<Room> Rooms { get; set; } = new List<Room>();
 
-        public ICollection<Town> TownHotels { get; set; }
+        public ICollection<Town> TownHotels { get; set; } = new List<Town>();
 
         [Required]
         public bool IsActive { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AhmedovTravel.Infrastructure.Data.Entities
 {
-    public class UserDestination
+    public class UserDestination  
     {
         [Required]
         public string UserId { get; set; }
