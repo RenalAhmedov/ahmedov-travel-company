@@ -18,7 +18,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Required]
         public string ImageUrl { get; set; } = null!;
 
-        public RatingEnum Rating { get; set; }
+        public RatingEnum? Rating { get; set; }
 
         [Required]
         [Column(TypeName = "money")]
@@ -29,17 +29,17 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public TransportEnum? TransportType { get; set; }
 
         [Required]
-        public Guid? TownId { get; set; }
+        public Guid TownId { get; set; }
 
         [Required]
         [ForeignKey(nameof(TownId))]
-        public Town? Town { get; set; }
+        public Town Town { get; set; }
 
-        public ICollection<Town>? Towns { get; set; } = new List<Town>();
+        public ICollection<Town> Towns { get; set; } = new List<Town>();
 
-        public ICollection<UserDestination>? UsersDestinations { get; set; } = new List<UserDestination>();
+        public ICollection<UserDestination> UsersDestinations { get; set; } = new List<UserDestination>();
 
-        public ICollection<User>? UserChosenDestination { get; set; } = new List<User>();
+        public ICollection<User> UserChosenDestination { get; set; } = new List<User>();
 
         [Required]
         public bool IsActive { get; set; }

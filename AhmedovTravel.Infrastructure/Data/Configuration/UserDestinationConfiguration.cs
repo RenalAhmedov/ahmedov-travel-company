@@ -23,14 +23,7 @@ namespace AhmedovTravel.Infrastructure.Data.Configuration
             builder.HasOne(ud => ud.Destination)
                 .WithMany(t => t.UsersDestinations)
                 .HasForeignKey(di => di.DestinationId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //UserDestination Foreign keys
-            builder.Property(di => di.DestinationId)
-          .IsRequired(false);
-
-            builder.Property(ui => ui.UserId)
-                .IsRequired(false);
+                .OnDelete(DeleteBehavior.Restrict); 
 
             //IsActive default value for all entities
             builder.Property(c => c.IsActive)

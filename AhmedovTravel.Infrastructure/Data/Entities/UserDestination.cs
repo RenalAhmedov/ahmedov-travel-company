@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AhmedovTravel.Infrastructure.Data.Entities
 {
@@ -20,7 +15,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public Guid DestinationId { get; set; }
 
         [ForeignKey(nameof(DestinationId))]
-        public Destination? Destination { get; set; }
+        public Destination Destination { get; set; }
 
         [Required]
         public bool IsActive { get; set; }
