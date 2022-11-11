@@ -1,6 +1,5 @@
 ﻿using AhmedovTravel.Infrastructure.Data.Configuration;
 using AhmedovTravel.Infrastructure.Data.Entities;
-using AhmedovTravel.Infrastructure.DataConstants;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

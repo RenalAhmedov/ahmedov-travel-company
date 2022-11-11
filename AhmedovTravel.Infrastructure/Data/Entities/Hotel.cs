@@ -15,7 +15,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public string Name { get; set; } = null!;
 
         [MaxLength(HotelConstants.HotelDescriptionMaxLength)]
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         public RatingEnum HotelRating { get; set; }
 

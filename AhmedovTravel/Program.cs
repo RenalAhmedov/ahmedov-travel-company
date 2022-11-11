@@ -1,6 +1,5 @@
 using AhmedovTravel.Infrastructure.Data.Entities;
 using AhmedovTravel.Infrastrucutre.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,12 +38,3 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
-
-
-
-
-
-//TODO FIX HOTEL ENTITY TownId and UserId to be null?? check
-//SAME WITH ROOMS
-//SAME WITH TOWNS
-// SAME WITH TOWNS AND CHECK ALL ENTITIES AND CONNECTIONS !!! AFTER THAT THE FLUENT API
