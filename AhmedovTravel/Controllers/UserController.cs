@@ -42,6 +42,8 @@ namespace AhmedovTravel.Controllers
 
             var user = new User
             {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 UserName = model.UserName,
                 Email = model.Email
             };

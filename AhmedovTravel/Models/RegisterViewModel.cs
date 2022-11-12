@@ -6,6 +6,14 @@ namespace AhmedovTravel.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(UserConstants.FirstNameMaxLength, MinimumLength = UserConstants.FirstNameMinLength)]
+        public string FirstName { get; set; } = null!;
+
+        [Required]
+        [StringLength(UserConstants.LastNameMaxLength, MinimumLength = UserConstants.LastNameMinLength)]
+        public string LastName { get; set; } = null!;
+
+        [Required]
         [StringLength(UserConstants.UserNameMaxLength, MinimumLength = UserConstants.UserNameMinLength)]
         public string UserName { get; set; } = null!;
 

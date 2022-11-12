@@ -20,6 +20,12 @@ namespace AhmedovTravel.Infrastructure.Data.Configuration
                 .HasForeignKey(e => e.DestinationId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Property(u => u.FirstName)
+               .HasMaxLength(UserConstants.FirstNameMaxLength);
+
+            builder.Property(u => u.LastName)
+               .HasMaxLength(UserConstants.LastNameMaxLength);
+
             builder.Property(u => u.UserName)
               .HasMaxLength(UserConstants.UserNameMaxLength);
 
