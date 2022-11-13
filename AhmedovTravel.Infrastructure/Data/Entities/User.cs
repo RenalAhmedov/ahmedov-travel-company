@@ -7,14 +7,6 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 {
     public class User : IdentityUser
     {
-        [Required]
-        [MaxLength(UserConstants.FirstNameMaxLength)]
-        public string FirstName { get; set; }
-
-        [Required]
-        [MaxLength(UserConstants.LastNameMaxLength)]
-        public string LastName { get; set; }
-
         public Guid? DestinationId { get; set; }
 
         [ForeignKey(nameof(DestinationId))]
