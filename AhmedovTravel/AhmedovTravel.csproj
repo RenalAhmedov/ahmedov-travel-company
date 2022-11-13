@@ -23,4 +23,8 @@
     <ProjectReference Include="..\AhmedovTravel.Core\AhmedovTravel.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Destination\" />
+  </ItemGroup>
+
 </Project>
