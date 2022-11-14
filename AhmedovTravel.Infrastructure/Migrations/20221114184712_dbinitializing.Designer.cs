@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AhmedovTravel.Infrastructure.Migrations
+namespace AhmedovTravel.Infrastructure.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221114175911_addedNewEntityAndRemoveOldProperties")]
-    partial class addedNewEntityAndRemoveOldProperties
+    [Migration("20221114184712_dbinitializing")]
+    partial class dbinitializing
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
