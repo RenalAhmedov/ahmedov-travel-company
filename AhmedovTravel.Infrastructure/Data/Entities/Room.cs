@@ -9,6 +9,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     {
         [Key]
         public int? Id { get; set; }
+
         public int RoomTypeId { get; set; }
 
         [ForeignKey(nameof(RoomTypeId))]
