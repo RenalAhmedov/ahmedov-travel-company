@@ -1,4 +1,5 @@
-﻿using AhmedovTravel.Core.Models.Destination;
+﻿using AhmedovTravel.Core.Contracts;
+using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,13 @@ namespace AhmedovTravel.Controllers
     [Authorize]
     public class DestinationController : Controller
     {
+        //private readonly IDestinationService destinationService;
+
+        //public DestinationController(IDestinationService _destinationService)
+        //{
+        //    destinationService = _destinationService;
+        //}
+
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
@@ -27,7 +35,7 @@ namespace AhmedovTravel.Controllers
         public IActionResult Add() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Add(DestinationModel model)
+        public async Task<IActionResult> Add(AddDestinationModel model)
         {
             int id = 1;
 
@@ -37,13 +45,13 @@ namespace AhmedovTravel.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var model = new DestinationModel();
+            var model = new AddDestinationModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Guid id, DestinationModel model)
+        public async Task<IActionResult> Edit(Guid id, AddDestinationModel model)
         {
             return RedirectToAction(nameof(All), new { id });
         }
