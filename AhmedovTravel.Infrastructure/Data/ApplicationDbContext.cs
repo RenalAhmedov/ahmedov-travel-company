@@ -15,6 +15,7 @@ namespace AhmedovTravel.Infrastrucutre.Data
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Town> Towns { get; set; }
         public DbSet<UserDestination> UsersDestinations { get; set; }
 
@@ -26,6 +27,7 @@ namespace AhmedovTravel.Infrastrucutre.Data
             builder.ApplyConfiguration(new TownConfiguration());
             builder.ApplyConfiguration(new HotelConfiguration());
             builder.ApplyConfiguration(new RoomConfiguration());
+            builder.ApplyConfiguration(new RoomTypeConfiguration());
             
 
             //builder.Entity<UserDestination>()
