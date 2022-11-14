@@ -27,7 +27,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public decimal Price { get; set; }
 
         [Required]
-        public Guid TownId { get; set; }
+        public int TownId { get; set; }
 
         [Required]
         [ForeignKey(nameof(TownId))]
