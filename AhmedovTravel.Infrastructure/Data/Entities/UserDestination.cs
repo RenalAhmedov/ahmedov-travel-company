@@ -6,13 +6,13 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     public class UserDestination  
     {
         [Required]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public User User { get; set; }
 
         [Required]
-        public Guid DestinationId { get; set; }
+        public int DestinationId { get; set; }
 
         [ForeignKey(nameof(DestinationId))]
         public Destination Destination { get; set; }

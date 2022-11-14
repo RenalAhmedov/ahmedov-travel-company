@@ -7,18 +7,21 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     public class Town
     {
         [Key]
-        public Guid? Id { get; set; }
+        public int? Id { get; set; }
 
         [Required]
         [MaxLength(TownConstants.TownNameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]
+        public string ImageUrl { get; set; } = null!;
+
+        [Required]
         [MaxLength(TownConstants.TownDescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
         [Required]
-        public Guid? HotelId { get; set; }
+        public int? HotelId { get; set; }
 
         [Required]
         [ForeignKey(nameof(HotelId))]

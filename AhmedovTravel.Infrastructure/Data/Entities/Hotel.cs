@@ -1,5 +1,5 @@
-﻿using AhmedovTravel.Infrastructure.Data.Entities.Enums;
-using AhmedovTravel.Infrastructure.DataConstants;
+﻿using AhmedovTravel.Infrastructure.DataConstants;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,19 +8,23 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     public class Hotel
     {
         [Key]
-        public Guid? Id { get; set; }
+        public int? Id { get; set; }
 
         [Required]
         [MaxLength(HotelConstants.HotelNameMaxLength)]
         public string Name { get; set; } = null!;
 
+        [Required]
+        public string ImageUrl { get; set; } = null!;
+
         [MaxLength(HotelConstants.HotelDescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
-        public RatingEnum HotelRating { get; set; }
+        [Precision(18, 2)]
+        public decimal HotelRating { get; set; }
 
         [Required]
-        public Guid? RoomId { get; set; }
+        public int? RoomId { get; set; }
 
         [Required]
         [ForeignKey(nameof(RoomId))]

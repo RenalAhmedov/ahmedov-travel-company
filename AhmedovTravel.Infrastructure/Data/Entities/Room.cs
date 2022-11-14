@@ -1,5 +1,4 @@
-﻿using AhmedovTravel.Infrastructure.Data.Entities.Enums;
-using AhmedovTravel.Infrastructure.DataConstants;
+﻿using AhmedovTravel.Infrastructure.DataConstants;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,14 +8,18 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     public class Room
     {
         [Key]
-        public Guid? Id { get; set; }
+        public int? Id { get; set; }
+        public int RoomTypeId { get; set; }
 
-        [Required]
-        public RoomTypeEnum? RoomType { get; set; }
+        [ForeignKey(nameof(RoomTypeId))]
+        public RoomType? RoomType { get; set; }
 
         [Required]
         [MaxLength(RoomConstants.RoomPersonsMaxLength)]
         public int Persons { get; set; }
+
+        [Required]
+        public string ImageUrl { get; set; } = null!;
 
         [Required]
         [Column(TypeName = "money")]

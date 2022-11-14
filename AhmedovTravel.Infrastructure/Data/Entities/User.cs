@@ -7,20 +7,17 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 {
     public class User : IdentityUser
     {
-        public Guid? DestinationId { get; set; }
+        public int? DestinationId { get; set; }
 
         [ForeignKey(nameof(DestinationId))]
         public Destination Destination { get; set; }
 
         public ICollection<UserDestination> UsersDestinations { get; set; } = new List<UserDestination>();
 
-        //[InverseProperty("")]
         public ICollection<Town> UserTowns { get; set; } = new List<Town>();
 
-        //[InverseProperty("")]
         public ICollection<Hotel> UserHotels { get; set; } = new List<Hotel>();
 
-        //[InverseProperty("")]
         public ICollection<Room> UserRooms { get; set; } = new List<Room>();
 
         [Required]
