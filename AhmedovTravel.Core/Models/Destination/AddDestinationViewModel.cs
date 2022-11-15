@@ -17,7 +17,7 @@ namespace AhmedovTravel.Core.Models.Destination
         public decimal Rating { get; set; }
 
         [Required]
-        [Range(DestinationConstants.PriceMinAmount, DestinationConstants.PriceMaxAmount)]
+        [Range(DestinationConstants.PriceMinAmount, DestinationConstants.PriceMaxAmount, ConvertValueInInvariantCulture = true)]
         public decimal Price { get; set; }
 
     }
