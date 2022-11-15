@@ -18,6 +18,18 @@ namespace AhmedovTravel.Core.Services
         {
             repo = _repo;
         }
- 
+
+        public async Task AddDestinationAsync(AddDestinationViewModel model)
+        {
+            var destination = new Destination()
+            {
+                Title = model.Title,
+                ImageUrl = model.ImageUrl,
+                Rating = model.Rating,
+                Price = model.Price
+            };
+            await repo.AddAsync(destination);
+            await repo.SaveChangesAsync();
+        }
     }
 }

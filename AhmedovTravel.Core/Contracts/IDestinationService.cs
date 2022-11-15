@@ -4,5 +4,6 @@ namespace AhmedovTravel.Core.Contracts
 {
     public interface IDestinationService
     {
+        Task AddDestinationAsync(AddDestinationViewModel model);
     }
 }

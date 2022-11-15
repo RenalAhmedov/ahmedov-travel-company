@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AhmedovTravel.Core.Models.Destination
 {
-    public class DestinationsQueryModel
+    public class AllDestinationsViewModel
     {
 
     }

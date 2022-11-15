@@ -1,6 +1,5 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Models.Destination;
-using AhmedovTravel.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,49 +8,67 @@ namespace AhmedovTravel.Controllers
     [Authorize]
     public class DestinationController : Controller
     {
-        //private readonly IDestinationService destinationService;
+        private readonly IDestinationService destinationService;
 
-        //public DestinationController(IDestinationService _destinationService)
-        //{
-        //    destinationService = _destinationService;
-        //}
+        public DestinationController(IDestinationService _destinationService)
+        {
+            destinationService = _destinationService;
+        }
 
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
-            var model = new DestinationsQueryModel();
+            var model = new AllDestinationsViewModel();
 
             return View();
         }
 
         public async Task<IActionResult> Mine()
         {
-            var model = new DestinationsQueryModel();
+            var model = new AllDestinationsViewModel();
 
             return View();
         }
 
         [HttpGet]
-        public IActionResult Add() => View();
-
-        [HttpPost]
-        public async Task<IActionResult> Add(AddDestinationModel model)
+        public IActionResult Add()
         {
-            int id = 1;
-
-            return RedirectToAction(nameof(All), new { id });
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(Guid id)
-        {
-            var model = new AddDestinationModel();
+            var model = new AddDestinationViewModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Guid id, AddDestinationModel model)
+        public async Task<IActionResult> Add(AddDestinationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                await destinationService.AddDestinationAsync(model);
+
+                return RedirectToAction(nameof(All));
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Something went wrong!");
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var model = new AddDestinationViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Guid id, AddDestinationViewModel model)
         {
             return RedirectToAction(nameof(All), new { id });
         }
@@ -61,7 +78,5 @@ namespace AhmedovTravel.Controllers
         {
             return RedirectToAction(nameof(All));
         }
-
-
     }
 }
