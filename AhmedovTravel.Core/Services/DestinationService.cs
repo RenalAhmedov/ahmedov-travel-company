@@ -2,6 +2,7 @@
 using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,19 @@ namespace AhmedovTravel.Core.Services
             };
             await repo.AddAsync(destination);
             await repo.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<AllDestinationsViewModel>> GetAllAsync()
+        {
+            return await repo.AllReadonly<Destination>()
+               .OrderBy(d => d.Id)
+               .Select(d => new AllDestinationsViewModel()
+               {
+                   Id = d.Id,
+                   ImageUrl = d.ImageUrl,
+                   Title = d.Title
+               })
+               .ToListAsync();
         }
     }
 }

@@ -18,9 +18,9 @@ namespace AhmedovTravel.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
-            var model = new AllDestinationsViewModel();
+            var model = await destinationService.GetAllAsync();
 
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> Mine()
