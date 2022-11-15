@@ -17,7 +17,7 @@ namespace AhmedovTravel.Core.Models.Destination
         public decimal Rating { get; set; }
 
         [Required]
-        [Range(DestinationConstants.PriceMinAmount, DestinationConstants.PriceMaxAmount, ErrorMessage = "Price must be a positive number and more than {300} leva", ConvertValueInInvariantCulture = true)]
+        [Range(DestinationConstants.PriceMinAmount, DestinationConstants.PriceMaxAmount)]
         public decimal Price { get; set; }
 
     }
