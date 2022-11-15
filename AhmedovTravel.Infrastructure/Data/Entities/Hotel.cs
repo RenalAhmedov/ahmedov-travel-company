@@ -8,7 +8,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     public class Hotel
     {
         [Key]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(HotelConstants.HotelNameMaxLength)]

@@ -8,9 +8,10 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     public class Room
     {
         [Key]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public int RoomTypeId { get; set; }
+
 
         [ForeignKey(nameof(RoomTypeId))]
         public RoomType? RoomType { get; set; }

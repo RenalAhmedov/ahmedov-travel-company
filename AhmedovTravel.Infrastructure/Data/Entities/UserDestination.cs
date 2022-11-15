@@ -6,7 +6,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     public class UserDestination  
     {
         [Required]
-        public string? UserId { get; set; }
+        public string UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public User User { get; set; }

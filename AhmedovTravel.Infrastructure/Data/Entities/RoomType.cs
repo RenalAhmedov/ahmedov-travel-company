@@ -6,7 +6,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
     public class RoomType
     {
         [Key]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
 
         [Required]
