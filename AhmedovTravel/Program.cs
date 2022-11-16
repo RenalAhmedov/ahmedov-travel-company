@@ -20,7 +20,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Account/Login";
+    options.LoginPath = "/User/Login";
 });
 
 builder.Services.AddControllersWithViews();

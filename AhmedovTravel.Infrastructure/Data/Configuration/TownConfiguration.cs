@@ -13,6 +13,9 @@ namespace AhmedovTravel.Infrastructure.Data.Configuration
                 .HasForeignKey(t => t.HotelId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Property(d => d.HotelId)
+              .IsRequired(false);
+
             builder.Property(tc => tc.IsActive)
                .HasDefaultValue(true);
         }

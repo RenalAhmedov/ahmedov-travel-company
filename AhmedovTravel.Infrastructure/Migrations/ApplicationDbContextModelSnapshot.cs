@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AhmedovTravel.Infrastructure.migrations
+namespace AhmedovTravel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -48,7 +48,7 @@ namespace AhmedovTravel.Infrastructure.migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("money");
 
-                    b.Property<decimal?>("Rating")
+                    b.Property<decimal>("Rating")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
@@ -57,7 +57,7 @@ namespace AhmedovTravel.Infrastructure.migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("TownId")
+                    b.Property<int?>("TownId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -99,7 +99,6 @@ namespace AhmedovTravel.Infrastructure.migrations
                         .HasColumnType("nvarchar(85)");
 
                     b.Property<int?>("RoomId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("TownId")
@@ -210,7 +209,7 @@ namespace AhmedovTravel.Infrastructure.migrations
                     b.Property<int?>("DestinationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("HotelId")
+                    b.Property<int?>("HotelId")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -477,9 +476,7 @@ namespace AhmedovTravel.Infrastructure.migrations
                 {
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Town", "Town")
                         .WithMany()
-                        .HasForeignKey("TownId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TownId");
 
                     b.Navigation("Town");
                 });
@@ -489,8 +486,7 @@ namespace AhmedovTravel.Infrastructure.migrations
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Room", "Room")
                         .WithMany("HotelRooms")
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Town", null)
                         .WithMany("Hotels")
@@ -531,8 +527,7 @@ namespace AhmedovTravel.Infrastructure.migrations
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Hotel", "Hotel")
                         .WithMany("TownHotels")
                         .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.User", null)
                         .WithMany("UserTowns")
@@ -543,13 +538,9 @@ namespace AhmedovTravel.Infrastructure.migrations
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.User", b =>
                 {
-                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Destination", "Destination")
+                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Destination", null)
                         .WithMany("UserChosenDestination")
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Destination");
+                        .HasForeignKey("DestinationId");
                 });
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.UserDestination", b =>

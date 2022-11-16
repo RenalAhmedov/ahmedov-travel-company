@@ -41,6 +41,8 @@ namespace AhmedovTravel.Core.Services
                {
                    Id = d.Id,
                    ImageUrl = d.ImageUrl,
+                   Price = d.Price,
+                   Rating = d.Rating,
                    Title = d.Title
                })
                .ToListAsync();

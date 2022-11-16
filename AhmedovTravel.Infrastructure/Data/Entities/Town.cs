@@ -20,9 +20,8 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [MaxLength(TownConstants.TownDescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
-        public int HotelId { get; set; }
+        public int? HotelId { get; set; }
 
-        [Required]
         [ForeignKey(nameof(HotelId))]
         public Hotel? Hotel { get; set; }
 

@@ -18,7 +18,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public string ImageUrl { get; set; } = null!;
 
         [Precision(18, 2)]
-        public decimal? Rating { get; set; }
+        public decimal Rating { get; set; }
 
         [Required]
         [Column(TypeName = "money")]
@@ -26,12 +26,10 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Range(DestinationConstants.PriceMinAmount, DestinationConstants.PriceMaxAmount)]
         public decimal Price { get; set; }
 
-        [Required]
-        public int TownId { get; set; }
+        public int? TownId { get; set; }
 
-        [Required]
         [ForeignKey(nameof(TownId))]
-        public Town Town { get; set; }
+        public Town? Town { get; set; }
 
         public ICollection<Town> Towns { get; set; } = new List<Town>();
 

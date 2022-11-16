@@ -8,6 +8,9 @@ namespace AhmedovTravel.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Destination> builder)
         {
+            builder.Property(d => d.TownId)
+               .IsRequired(false);
+
             builder.Property(d => d.IsActive)
                .HasDefaultValue(true);
 
