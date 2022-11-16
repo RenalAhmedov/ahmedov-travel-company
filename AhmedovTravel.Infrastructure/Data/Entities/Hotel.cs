@@ -24,11 +24,11 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public decimal HotelRating { get; set; }
 
         [Required]
-        public int? RoomId { get; set; }
+        public int RoomId { get; set; }
 
         [Required]
         [ForeignKey(nameof(RoomId))]
-        public Room? Room { get; set; }
+        public Room Room { get; set; }
 
         public ICollection<Room> Rooms { get; set; } = new List<Room>();
 

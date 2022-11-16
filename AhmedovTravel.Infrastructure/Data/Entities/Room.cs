@@ -14,7 +14,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 
 
         [ForeignKey(nameof(RoomTypeId))]
-        public RoomType? RoomType { get; set; }
+        public RoomType RoomType { get; set; }
 
         [Required]
         [MaxLength(RoomConstants.RoomPersonsMaxLength)]
