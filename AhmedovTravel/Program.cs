@@ -1,5 +1,6 @@
 using AhmedovTravel.Infrastructure.Data.Entities;
 using AhmedovTravel.Infrastrucutre.Data;
+using AhmedovTravel.ModelBinders;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +24,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/User/Login";
 });
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+.AddMvcOptions(options =>
+ {
+     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+ });
+
 builder.Services.AddApplicationServices();
 
 var app = builder.Build();
