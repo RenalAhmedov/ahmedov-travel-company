@@ -33,6 +33,37 @@ namespace AhmedovTravel.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        public async Task AddDestinationToCollectionAsync(int destinationId, string userId)
+        {
+            var user = await repo.All<User>()
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            var destination = await repo.All<Destination>()
+                 .FirstOrDefaultAsync(d => d.Id == destinationId);
+
+            if (destination == null)
+            {
+                throw new ArgumentException("Invalid Destination ID");
+            }
+
+            if (!user.UsersDestinations.Any(d => d.DestinationId == destinationId))
+            {
+                user.UsersDestinations.Add(new UserDestination()
+                {
+                    DestinationId = destination.Id,
+                    UserId = user.Id,
+                    Destination = destination,
+                    User = user
+                });
+            }
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<AllDestinationsViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Destination>()

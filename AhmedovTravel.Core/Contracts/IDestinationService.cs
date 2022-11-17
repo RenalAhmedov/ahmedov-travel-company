@@ -6,5 +6,6 @@ namespace AhmedovTravel.Core.Contracts
     {
         Task AddDestinationAsync(AddDestinationViewModel model);
         Task<IEnumerable<AllDestinationsViewModel>> GetAllAsync();
+        Task AddDestinationToCollectionAsync(int destinationId, string userId);
     }
 }
