@@ -2,6 +2,7 @@
 using AhmedovTravel.Core.Models.Destination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AhmedovTravel.Controllers
 {
@@ -57,6 +58,10 @@ namespace AhmedovTravel.Controllers
                 ModelState.AddModelError("", "Something went wrong!");
                 return View(model);
             }
+        }
+        public async Task<IActionResult> AddToCollection(int destinationId)
+        {
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
