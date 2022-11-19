@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AhmedovTravel.Infrastructure.DataConstants
+﻿namespace AhmedovTravel.Infrastructure.DataConstants
 {
     public static class DestinationConstants
     {
@@ -13,6 +7,9 @@ namespace AhmedovTravel.Infrastructure.DataConstants
 
         public const int PriceMinAmount = 300;
         public const int PriceMaxAmount = 1000;
+
+        public const int TownNameMinLength = 4;
+        public const int TownNameMaxLength = 100;
 
     }
 }

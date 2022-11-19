@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AhmedovTravel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221116210217_dbInitialization")]
-    partial class dbInitialization
+    [Migration("20221119140833_entityValidationSetup")]
+    partial class entityValidationSetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("HotelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -59,12 +62,14 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("TownId")
-                        .HasColumnType("int");
+                    b.Property<string>("Town")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TownId");
+                    b.HasIndex("HotelId");
 
                     b.ToTable("Destinations");
                 });
@@ -81,6 +86,9 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int?>("DestinationId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("HotelRating")
                         .HasPrecision(18, 2)
@@ -103,17 +111,14 @@ namespace AhmedovTravel.Infrastructure.Migrations
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TownId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex("DestinationId");
 
-                    b.HasIndex("TownId");
+                    b.HasIndex("RoomId");
 
                     b.HasIndex("UserId");
 
@@ -148,7 +153,7 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("money");
 
-                    b.Property<int>("RoomTypeId")
+                    b.Property<int?>("RoomTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -193,53 +198,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
                             Id = 2,
                             Name = "Double"
                         });
-                });
-
-            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Town", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<int?>("DestinationId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("HotelId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(85)
-                        .HasColumnType("nvarchar(85)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DestinationId");
-
-                    b.HasIndex("HotelId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Towns");
                 });
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.User", b =>
@@ -476,23 +434,23 @@ namespace AhmedovTravel.Infrastructure.Migrations
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Destination", b =>
                 {
-                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Town", "Town")
+                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Hotel", "Hotel")
                         .WithMany()
-                        .HasForeignKey("TownId");
+                        .HasForeignKey("HotelId");
 
-                    b.Navigation("Town");
+                    b.Navigation("Hotel");
                 });
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Hotel", b =>
                 {
+                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Destination", null)
+                        .WithMany("Hotels")
+                        .HasForeignKey("DestinationId");
+
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Room", "Room")
                         .WithMany("HotelRooms")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Town", null)
-                        .WithMany("Hotels")
-                        .HasForeignKey("TownId");
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.User", null)
                         .WithMany("UserHotels")
@@ -509,33 +467,13 @@ namespace AhmedovTravel.Infrastructure.Migrations
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.RoomType", "RoomType")
                         .WithMany()
-                        .HasForeignKey("RoomTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomTypeId");
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.User", null)
                         .WithMany("UserRooms")
                         .HasForeignKey("UserId");
 
                     b.Navigation("RoomType");
-                });
-
-            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Town", b =>
-                {
-                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Destination", null)
-                        .WithMany("Towns")
-                        .HasForeignKey("DestinationId");
-
-                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Hotel", "Hotel")
-                        .WithMany("TownHotels")
-                        .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.User", null)
-                        .WithMany("UserTowns")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Hotel");
                 });
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.User", b =>
@@ -617,7 +555,7 @@ namespace AhmedovTravel.Infrastructure.Migrations
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Destination", b =>
                 {
-                    b.Navigation("Towns");
+                    b.Navigation("Hotels");
 
                     b.Navigation("UserChosenDestination");
 
@@ -627,8 +565,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Hotel", b =>
                 {
                     b.Navigation("Rooms");
-
-                    b.Navigation("TownHotels");
                 });
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Room", b =>
@@ -636,18 +572,11 @@ namespace AhmedovTravel.Infrastructure.Migrations
                     b.Navigation("HotelRooms");
                 });
 
-            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Town", b =>
-                {
-                    b.Navigation("Hotels");
-                });
-
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.User", b =>
                 {
                     b.Navigation("UserHotels");
 
                     b.Navigation("UserRooms");
-
-                    b.Navigation("UserTowns");
 
                     b.Navigation("UsersDestinations");
                 });

@@ -26,6 +26,7 @@ namespace AhmedovTravel.Core.Services
             {
                 Title = model.Title,
                 ImageUrl = model.ImageUrl,
+                Town = model.Town,
                 Rating = model.Rating,
                 Price = model.Price
             };
@@ -72,6 +73,7 @@ namespace AhmedovTravel.Core.Services
                {
                    Id = d.Id,
                    ImageUrl = d.ImageUrl,
+                   Town = d.Town,
                    Price = d.Price,
                    Rating = d.Rating,
                    Title = d.Title

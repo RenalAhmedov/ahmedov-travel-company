@@ -21,7 +21,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public string Description { get; set; } = null!;
 
         [Precision(18, 2)]
-        public decimal HotelRating { get; set; }
+        public decimal HotelRating { get; set; } 
 
         public int? RoomId { get; set; }
 
@@ -30,7 +30,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 
         public ICollection<Room> Rooms { get; set; } = new List<Room>();
 
-        public ICollection<Town> TownHotels { get; set; } = new List<Town>();
+        //public ICollection<Destination> DestinationHotels { get; set; } = new List<Destination>();
 
         [Required]
         public bool IsActive { get; set; }

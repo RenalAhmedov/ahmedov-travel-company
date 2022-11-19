@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AhmedovTravel.Infrastructure.Migrations
 {
-    public partial class dbInitialization : Migration
+    public partial class DBinitialization : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -158,10 +158,11 @@ namespace AhmedovTravel.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Town = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Price = table.Column<decimal>(type: "money", precision: 18, scale: 2, nullable: false),
-                    TownId = table.Column<int>(type: "int", nullable: true),
+                    HotelId = table.Column<int>(type: "int", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     IsChosen = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
                 },
@@ -207,7 +208,7 @@ namespace AhmedovTravel.Infrastructure.Migrations
                     HotelRating = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     RoomId = table.Column<int>(type: "int", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    TownId = table.Column<int>(type: "int", nullable: true),
+                    DestinationId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -217,6 +218,11 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         name: "FK_Hotels_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Hotels_Destinations_DestinationId",
+                        column: x => x.DestinationId,
+                        principalTable: "Destinations",
                         principalColumn: "Id");
                 });
 
@@ -253,41 +259,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         principalTable: "RoomTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Towns",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(85)", maxLength: 85, nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    HotelId = table.Column<int>(type: "int", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    DestinationId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Towns", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Towns_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Towns_Destinations_DestinationId",
-                        column: x => x.DestinationId,
-                        principalTable: "Destinations",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Towns_Hotels_HotelId",
-                        column: x => x.HotelId,
-                        principalTable: "Hotels",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -345,19 +316,19 @@ namespace AhmedovTravel.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Destinations_TownId",
+                name: "IX_Destinations_HotelId",
                 table: "Destinations",
-                column: "TownId");
+                column: "HotelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hotels_DestinationId",
+                table: "Hotels",
+                column: "DestinationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Hotels_RoomId",
                 table: "Hotels",
                 column: "RoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Hotels_TownId",
-                table: "Hotels",
-                column: "TownId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Hotels_UserId",
@@ -377,21 +348,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_UserId",
                 table: "Rooms",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Towns_DestinationId",
-                table: "Towns",
-                column: "DestinationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Towns_HotelId",
-                table: "Towns",
-                column: "HotelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Towns_UserId",
-                table: "Towns",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -431,10 +387,10 @@ namespace AhmedovTravel.Infrastructure.Migrations
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Destinations_Towns_TownId",
+                name: "FK_Destinations_Hotels_HotelId",
                 table: "Destinations",
-                column: "TownId",
-                principalTable: "Towns",
+                column: "HotelId",
+                principalTable: "Hotels",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
@@ -444,13 +400,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
                 principalTable: "Rooms",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Hotels_Towns_TownId",
-                table: "Hotels",
-                column: "TownId",
-                principalTable: "Towns",
-                principalColumn: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -464,20 +413,12 @@ namespace AhmedovTravel.Infrastructure.Migrations
                 table: "Rooms");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Towns_AspNetUsers_UserId",
-                table: "Towns");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Towns_Destinations_DestinationId",
-                table: "Towns");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Hotels_Towns_TownId",
+                name: "FK_Hotels_Destinations_DestinationId",
                 table: "Hotels");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Hotels_Rooms_RoomId",
-                table: "Hotels");
+                name: "FK_Rooms_Hotels_HotelId",
+                table: "Rooms");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -507,13 +448,10 @@ namespace AhmedovTravel.Infrastructure.Migrations
                 name: "Destinations");
 
             migrationBuilder.DropTable(
-                name: "Towns");
+                name: "Hotels");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
-
-            migrationBuilder.DropTable(
-                name: "Hotels");
 
             migrationBuilder.DropTable(
                 name: "RoomTypes");

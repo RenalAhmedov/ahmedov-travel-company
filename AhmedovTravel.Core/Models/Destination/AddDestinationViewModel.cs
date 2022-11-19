@@ -10,6 +10,10 @@ namespace AhmedovTravel.Core.Models.Destination
         public string Title { get; set; }
 
         [Required]
+        [StringLength(DestinationConstants.TownNameMaxLength), MinLength(DestinationConstants.TownNameMinLength)]
+        public string Town { get; set; }
+
+        [Required]
         public string ImageUrl { get; set; } = null!;
 
         [Required]

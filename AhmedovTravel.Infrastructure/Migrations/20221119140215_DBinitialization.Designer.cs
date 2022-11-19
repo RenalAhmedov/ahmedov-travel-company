@@ -4,6 +4,7 @@ using AhmedovTravel.Infrastrucutre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AhmedovTravel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221119140215_DBinitialization")]
+    partial class DBinitialization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,7 +153,7 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("money");
 
-                    b.Property<int?>("RoomTypeId")
+                    b.Property<int>("RoomTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -465,7 +467,9 @@ namespace AhmedovTravel.Infrastructure.Migrations
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.RoomType", "RoomType")
                         .WithMany()
-                        .HasForeignKey("RoomTypeId");
+                        .HasForeignKey("RoomTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.User", null)
                         .WithMany("UserRooms")

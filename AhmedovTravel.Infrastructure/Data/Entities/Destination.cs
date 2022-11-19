@@ -15,6 +15,10 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         public string Title { get; set; } = null!;
 
         [Required]
+        [MaxLength(DestinationConstants.TownNameMaxLength)]
+        public string Town { get; set; } = null!;
+
+        [Required]
         public string ImageUrl { get; set; } = null!;
 
         [Precision(18, 2)]
@@ -26,12 +30,12 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Range(DestinationConstants.PriceMinAmount, DestinationConstants.PriceMaxAmount)]
         public decimal Price { get; set; }
 
-        public int? TownId { get; set; }
+        public int? HotelId { get; set; }
 
-        [ForeignKey(nameof(TownId))]
-        public Town? Town { get; set; }
+        [ForeignKey(nameof(HotelId))]
+        public Hotel? Hotel { get; set; }
 
-        public ICollection<Town> Towns { get; set; } = new List<Town>();
+        public ICollection<Hotel> Hotels { get; set; } = new List<Hotel>();
 
         public ICollection<UserDestination> UsersDestinations { get; set; } = new List<UserDestination>();
 

@@ -8,7 +8,7 @@ namespace AhmedovTravel.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Destination> builder)
         {
-            builder.Property(d => d.TownId)
+            builder.Property(d => d.HotelId)
                .IsRequired(false);
 
             builder.Property(d => d.IsActive)
