@@ -3,7 +3,6 @@ using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace AhmedovTravel.Controllers
 {
@@ -23,13 +22,6 @@ namespace AhmedovTravel.Controllers
             var model = await destinationService.GetAllAsync();
 
             return View(model);
-        }
-
-        public async Task<IActionResult> Mine()
-        {
-            var model = new AllDestinationsViewModel();
-
-            return View();
         }
 
         [HttpGet]

@@ -1,8 +1,28 @@
-﻿@model AllDestinationsViewModel
+﻿@model IEnumerable<MineDestinationsViewModel>
 
 @{
-    ViewBag.Title = "Mine Destinations";
+    ViewBag.Title = "My chosen destinations";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
+<div class="text-center row">
+    @foreach (var destination in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@destination.ImageUrl" alt="Destination Image">
+
+            <div class="card-body">
+                <h5 class="card-title mt-1">@destination.Title</h5>
+                <p class="mb-0">Director: @destination.Town</p>
+                <p class="mb-0">Rating: @destination.Rating</p>
+            </div>
+
+            <form class="input-group-sm" asp-route-destinationId="@destination.Id" asp-controller="Destination" asp-action="RemoveFromCollection" method="post">
+                <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Mark as Unwanted" />
+            </form>
+        </div>
+    }
+</div>
