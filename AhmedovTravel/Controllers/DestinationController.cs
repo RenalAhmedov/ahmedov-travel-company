@@ -1,5 +1,6 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Models.Destination;
+using AhmedovTravel.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -61,6 +62,16 @@ namespace AhmedovTravel.Controllers
         }
         public async Task<IActionResult> AddToCollection(int destinationId)
         {
+            try
+            {
+                var userId = User.Id();
+                await destinationService.AddDestinationToCollectionAsync(destinationId, userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
             return RedirectToAction(nameof(All));
         }
 
