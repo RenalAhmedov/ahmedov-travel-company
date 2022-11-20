@@ -54,6 +54,8 @@ namespace AhmedovTravel.Controllers
                 return View(model);
             }
         }
+
+        [HttpPost]
         public async Task<IActionResult> AddToCollection(int destinationId)
         {
             try
@@ -69,6 +71,7 @@ namespace AhmedovTravel.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [HttpGet]
         public async Task<IActionResult> ShowDestinationCollection()
         {
             var userId = User.Id();
