@@ -3,11 +3,6 @@ using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AhmedovTravel.Core.Services
 {
@@ -79,6 +74,51 @@ namespace AhmedovTravel.Core.Services
                    Title = d.Title
                })
                .ToListAsync();
+        }
+
+        public async Task RemoveDestinationFromCollectionAsync(int destinationId, string userId)
+        {
+            var user = await repo.All<User>()
+                .Include(u => u.UsersDestinations)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            var destination = user.UsersDestinations.FirstOrDefault(m => m.DestinationId == destinationId);
+
+            if (destination != null)
+            {
+                user.UsersDestinations.Remove(destination);
+
+                await repo.SaveChangesAsync(); // check
+            }
+        }
+
+        public async Task<IEnumerable<MineDestinationsViewModel>> ShowDestinationCollectionAsync(string userId)
+        {
+            var user = await repo.All<User>()
+                .Include(u => u.UsersDestinations)
+                .ThenInclude(u => u.Destination)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            return user.UsersDestinations
+                .Select(d => new MineDestinationsViewModel()
+                {
+                    Id = d.Destination.Id,
+                    Title = d.Destination.Title,
+                    Town = d.Destination.Town,
+                    ImageUrl = d.Destination.ImageUrl,
+                    Rating = d.Destination.Rating,
+                    Price = d.Destination.Price
+                });
         }
     }
 }

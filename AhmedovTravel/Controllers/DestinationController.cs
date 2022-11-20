@@ -3,6 +3,8 @@ using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileSystemGlobbing;
+using System.Security.Claims;
 
 namespace AhmedovTravel.Controllers
 {
@@ -67,6 +69,14 @@ namespace AhmedovTravel.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        public async Task<IActionResult> ShowDestinationCollection()
+        {
+            var userId = User.Id();
+            var model = await destinationService.ShowDestinationCollectionAsync(userId);
+
+            return View("Mine", model);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -82,9 +92,13 @@ namespace AhmedovTravel.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> RemoveFromCollection(int destinationId)
         {
-            return RedirectToAction(nameof(All));
+            var userId = User.Id();
+
+            await destinationService.RemoveDestinationFromCollectionAsync(destinationId, userId);
+
+            return RedirectToAction(nameof(ShowDestinationCollection));
         }
     }
 }
