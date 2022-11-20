@@ -60,6 +60,43 @@ namespace AhmedovTravel.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        public async Task<AllDestinationsViewModel> DestinationDetailsById(int id)
+        {
+            return await repo.AllReadonly<Destination>()
+                .Where(h => h.IsActive)
+                .Where(h => h.Id == id)
+                .Select(h => new AllDestinationsViewModel()
+                {
+                    Id = id,
+                    ImageUrl = h.ImageUrl,        
+                    Title = h.Title,
+                    Town = h.Town,
+                    Price = h.Price,
+                    Rating = h.Rating
+
+                })
+                .FirstAsync();
+        }
+
+        public async Task EditDestinationAsync(int destinationId, EditDestinationViewModel model)
+        {
+            var destination = await repo.GetByIdAsync<Destination>(destinationId);
+
+            destination.Title = model.Title;
+            destination.Town = model.Town;
+            destination.ImageUrl = model.ImageUrl;
+            destination.Rating = model.Rating;
+            destination.Price = model.Price;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<bool> Exists(int id)
+        {
+            return await repo.AllReadonly<Destination>()
+              .AnyAsync(h => h.Id == id && h.IsActive);
+        }
+
         public async Task<IEnumerable<AllDestinationsViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Destination>()
@@ -120,5 +157,6 @@ namespace AhmedovTravel.Core.Services
                     Price = d.Destination.Price
                 });
         }
+
     }
 }

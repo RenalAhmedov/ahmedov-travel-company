@@ -1,6 +1,7 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Extensions;
+using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileSystemGlobbing;
@@ -81,17 +82,53 @@ namespace AhmedovTravel.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var model = new AddDestinationViewModel();
+            if ((await destinationService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var destination = await destinationService.DestinationDetailsById(id);
+
+            var model = new EditDestinationViewModel()
+            {
+                Id = id,
+                Title = destination.Title,
+                Town = destination.Town,
+                ImageUrl = destination.ImageUrl,
+                Price = destination.Price,
+                Rating = destination.Rating,
+
+            };
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Guid id, AddDestinationViewModel model)
+        public async Task<IActionResult> Edit(int id, EditDestinationViewModel model)
         {
-            return RedirectToAction(nameof(All), new { id });
+            if (id != model.Id)
+            {
+                ModelState.AddModelError("", "Something went wrong!");
+                return RedirectToAction(nameof(All));
+            }
+
+            if ((await destinationService.Exists(model.Id)) == false)
+            {
+                ModelState.AddModelError("", "Destination doesn't exist");
+
+                return View(model);
+            }
+
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
+
+            await destinationService.EditDestinationAsync(model.Id, model);
+
+            return RedirectToAction(nameof(All), new { model.Id });
         }
 
         [HttpPost]
