@@ -4,13 +4,13 @@
     {
         public int Id { get; set; }
 
-        public string Title { get; set; } = null!;
+        public string Title { get; set; } 
 
-        public string Town { get; set; } = null!;
+        public string Town { get; set; } 
 
         public decimal Price { get; set; } 
 
-        public string ImageUrl { get; set; } = null!;
+        public string ImageUrl { get; set; } 
 
         public decimal Rating { get; set; } 
     }

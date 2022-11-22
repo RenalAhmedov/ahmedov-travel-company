@@ -1,11 +1,8 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Extensions;
-using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileSystemGlobbing;
-using System.Security.Claims;
 
 namespace AhmedovTravel.Controllers
 {
@@ -102,6 +99,18 @@ namespace AhmedovTravel.Controllers
             };
 
             return View(model);
+
+            //var destination = this.data.Destinations.Find(id);
+
+            //return View(new EditDestinationViewModel()
+            //{
+            //    Id = id,
+            //    Title = destination.Title,
+            //    Town = destination.Town,
+            //    ImageUrl = destination.ImageUrl,
+            //    Price = destination.Price,
+            //    Rating = destination.Rating,
+            //});
         }
 
         [HttpPost]
@@ -128,6 +137,17 @@ namespace AhmedovTravel.Controllers
             await destinationService.Edit(model.Id, model);
 
             return RedirectToAction(nameof(All), new { model.Id });
+
+            //var destination = this.data.Destinations.Find(id);
+            //destination.Title = destination.Title;
+            //destination.Town = destination.Town;
+            //destination.ImageUrl = destination.ImageUrl;
+            //destination.Price = destination.Price;
+            //destination.Rating = destination.Rating;
+
+            //this.data.SaveChanges();
+
+            //return RedirectToAction("All");
         }
 
         [HttpPost]
