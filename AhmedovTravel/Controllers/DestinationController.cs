@@ -125,7 +125,7 @@ namespace AhmedovTravel.Controllers
                 return View(model);
             }
 
-            await destinationService.EditDestinationAsync(model.Id, model);
+            await destinationService.Edit(model.Id, model);
 
             return RedirectToAction(nameof(All), new { model.Id });
         }

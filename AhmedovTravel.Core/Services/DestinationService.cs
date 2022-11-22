@@ -78,7 +78,7 @@ namespace AhmedovTravel.Core.Services
                 .FirstAsync();
         }
 
-        public async Task EditDestinationAsync(int destinationId, EditDestinationViewModel model)
+        public async Task Edit(int destinationId, EditDestinationViewModel model)
         {
             var destination = await repo.GetByIdAsync<Destination>(destinationId);
 
