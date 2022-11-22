@@ -21,7 +21,7 @@
                 <form class="input-group-sm" asp-route-destinationId="@destination.Id" asp-controller="Destination" asp-action="AddToCollection" method="post">
                     <input type="submit" value="Select" class="fs-6 btn btn-success mb-3 p-2" />
                 </form>
-                <form class="input-group-sm" asp-route-destinationId="@destination.Id" asp-controller="Destination" asp-action="Edit" method="post">
+                <form class="input-group-sm" asp-route-Id="@destination.Id" asp-controller="Destination" asp-action="Edit" method="get">
                     <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Edit" />
                 </form>
             }
