@@ -94,7 +94,7 @@ namespace AhmedovTravel.Core.Services
         public async Task<bool> Exists(int id)
         {
             return await repo.AllReadonly<Destination>()
-              .AnyAsync(h => h.Id == id && h.IsActive);
+              .AnyAsync(h => h.Id == id /*&& h.IsActive*/);
         }
 
         public async Task<IEnumerable<AllDestinationsViewModel>> GetAllAsync()

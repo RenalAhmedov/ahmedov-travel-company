@@ -5,7 +5,6 @@ namespace AhmedovTravel.Core.Models.Destination
 {
     public class EditDestinationViewModel
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]

@@ -89,7 +89,7 @@ namespace AhmedovTravel.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            var destination = await destinationService.DestinationDetailsById(id);
+            var destination = await destinationService.DestinationDetailsById(id); //check
 
             var model = new EditDestinationViewModel()
             {
@@ -99,7 +99,6 @@ namespace AhmedovTravel.Controllers
                 ImageUrl = destination.ImageUrl,
                 Price = destination.Price,
                 Rating = destination.Rating,
-
             };
 
             return View(model);
