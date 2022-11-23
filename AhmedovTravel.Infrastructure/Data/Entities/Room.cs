@@ -12,9 +12,13 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 
         public int? RoomTypeId { get; set; }
 
-
         [ForeignKey(nameof(RoomTypeId))]
         public RoomType RoomType { get; set; }
+
+        public int? RoomServiceId { get; set; }
+
+        [ForeignKey(nameof(RoomServiceId))]
+        public RoomService RoomService { get; set; }
 
         [Required]
         [MaxLength(RoomConstants.RoomPersonsMaxLength)]
@@ -27,7 +31,6 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Column(TypeName = "money")]
         [Precision(18,2)]
         public decimal PricePerNight { get; set; }
-
         public ICollection<Hotel> HotelRooms { get; set; } = new List<Hotel>();
 
         [Required]

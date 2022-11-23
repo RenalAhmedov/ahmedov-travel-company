@@ -14,7 +14,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Required]
         [Column(TypeName = "money")]
         [Precision(18, 2)]
-        public decimal Price { get; set; }
+        public decimal PricePerPerson { get; set; }
 
         [Required]
         [MaxLength(RoomServiceConstants.RoomServiceDescriptionMaxLength)]
@@ -23,6 +23,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Required]
         public string ImageUrl { get; set; }
 
-
+        [Required]
+        public bool IsActive { get; set; }
     }
 }
