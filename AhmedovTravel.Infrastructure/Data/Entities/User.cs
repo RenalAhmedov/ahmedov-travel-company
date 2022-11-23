@@ -1,7 +1,5 @@
-﻿using AhmedovTravel.Infrastructure.DataConstants;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AhmedovTravel.Infrastructure.Data.Entities
 {
