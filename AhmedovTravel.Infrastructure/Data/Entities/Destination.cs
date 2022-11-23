@@ -27,7 +27,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Required]
         [Column(TypeName = "money")]
         [Precision(18, 2)]
-        //[Range(DestinationConstants.PriceMinAmount, DestinationConstants.PriceMaxAmount)]
+        [Range(DestinationConstants.PriceMinAmount, DestinationConstants.PriceMaxAmount)]
         public decimal Price { get; set; }
 
         public int? HotelId { get; set; }
