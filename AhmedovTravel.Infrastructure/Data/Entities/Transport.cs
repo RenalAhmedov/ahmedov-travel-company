@@ -14,5 +14,8 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 
         [Required]
         public string ImageUrl { get; set; } = null!;
+
+        [Required]
+        public bool IsActive { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using AhmedovTravel.Infrastrucutre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AhmedovTravel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221123134037_addingNewTableEntity")]
+    partial class addingNewTableEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,12 +227,7 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Transports");
 
@@ -262,6 +259,9 @@ namespace AhmedovTravel.Infrastructure.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DestinationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -309,6 +309,8 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DestinationId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -528,11 +530,11 @@ namespace AhmedovTravel.Infrastructure.Migrations
                     b.Navigation("RoomType");
                 });
 
-            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Transport", b =>
+            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.User", b =>
                 {
-                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.User", null)
-                        .WithMany("UserTransport")
-                        .HasForeignKey("UserId");
+                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Destination", null)
+                        .WithMany("UserChosenDestination")
+                        .HasForeignKey("DestinationId");
                 });
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.UserDestination", b =>
@@ -609,6 +611,8 @@ namespace AhmedovTravel.Infrastructure.Migrations
                 {
                     b.Navigation("Hotels");
 
+                    b.Navigation("UserChosenDestination");
+
                     b.Navigation("UsersDestinations");
                 });
 
@@ -627,8 +631,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
                     b.Navigation("UserHotels");
 
                     b.Navigation("UserRooms");
-
-                    b.Navigation("UserTransport");
 
                     b.Navigation("UsersDestinations");
                 });

@@ -30,8 +30,6 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 
         public ICollection<Room> Rooms { get; set; } = new List<Room>();
 
-        //public ICollection<Destination> DestinationHotels { get; set; } = new List<Destination>();
-
         [Required]
         public bool IsActive { get; set; }
     }

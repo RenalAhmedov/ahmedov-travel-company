@@ -44,8 +44,6 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 
         public ICollection<UserDestination> UsersDestinations { get; set; } = new List<UserDestination>();
 
-        public ICollection<User> UserChosenDestination { get; set; } = new List<User>();
-
         [Required]
         public bool IsActive { get; set; }
 
