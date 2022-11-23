@@ -25,7 +25,7 @@ namespace AhmedovTravel.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
             var model = new AddDestinationViewModel();
 
@@ -66,7 +66,7 @@ namespace AhmedovTravel.Controllers
                 throw;
             }
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(ShowDestinationCollection));
         }
 
         [HttpGet]
