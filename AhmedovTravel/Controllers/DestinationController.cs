@@ -136,5 +136,40 @@ namespace AhmedovTravel.Controllers
 
             return RedirectToAction(nameof(ShowDestinationCollection));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if ((await destinationService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var destination = await destinationService.DestinationDetailsById(id);
+            var model = new AllDestinationsViewModel()
+            {
+                Title = destination.Title,
+                Town = destination.Town,
+                Price = destination.Price,
+                ImageUrl = destination.ImageUrl,
+                Rating = destination.Rating
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, AllDestinationsViewModel model)
+        {
+            if ((await destinationService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            await destinationService.Delete(id);
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

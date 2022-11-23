@@ -60,6 +60,14 @@ namespace AhmedovTravel.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        public async Task Delete(int destinationId)
+        {
+            var destination = await repo.GetByIdAsync<Destination>(destinationId);
+            destination.IsActive = false;
+
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<AllDestinationsViewModel> DestinationDetailsById(int id)
         {
             return await repo.AllReadonly<Destination>()
@@ -100,6 +108,7 @@ namespace AhmedovTravel.Core.Services
         public async Task<IEnumerable<AllDestinationsViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Destination>()
+               .Where(c => c.IsActive) //check
                .OrderBy(d => d.Id)
                .Select(d => new AllDestinationsViewModel()
                {
@@ -130,7 +139,7 @@ namespace AhmedovTravel.Core.Services
             {
                 user.UsersDestinations.Remove(destination);
 
-                await repo.SaveChangesAsync(); // check
+                await repo.SaveChangesAsync();
             }
         }
 
