@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AhmedovTravel.Infrastructure.DataConstants
 {
-    public class HotelConstants
+    public static class HotelConstants
     {
         public const int HotelNameMinLength = 1;
         public const int HotelNameMaxLength = 85;

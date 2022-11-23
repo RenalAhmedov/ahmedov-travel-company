@@ -35,6 +35,11 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [ForeignKey(nameof(HotelId))]
         public Hotel? Hotel { get; set; }
 
+        public int? TransportId { get; set; }
+
+        [ForeignKey(nameof(TransportId))]
+        public Transport? Transport { get; set; }
+
         public ICollection<Hotel> Hotels { get; set; } = new List<Hotel>();
 
         public ICollection<UserDestination> UsersDestinations { get; set; } = new List<UserDestination>();

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AhmedovTravel.Infrastructure.DataConstants
 {
-    public static class RoomTypeConstants
+    public static class TransportConstants
     {
-        public const int RoomTypeMinLength = 5;
-        public const int RoomTypeMaxLength = 10;
+        public const int TransportNameMinLength = 3;
+        public const int TransportNameMaxLength = 20;
     }
 }
