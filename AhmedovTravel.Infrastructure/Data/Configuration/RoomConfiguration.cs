@@ -11,6 +11,9 @@ namespace AhmedovTravel.Infrastructure.Data.Configuration
             builder.Property(d => d.RoomTypeId)
                .IsRequired(false);
 
+            builder.Property(d => d.RoomServiceId)
+           .IsRequired(false);
+
             builder.Property(c => c.IsActive)
                .HasDefaultValue(true);
         }

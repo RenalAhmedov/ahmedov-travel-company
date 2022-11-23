@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AhmedovTravel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221119140833_entityValidationSetup")]
-    partial class entityValidationSetup
+    [Migration("20221123145110_DBinitializationNew")]
+    partial class DBinitializationNew
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,9 +67,14 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("TransportId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("HotelId");
+
+                    b.HasIndex("TransportId");
 
                     b.ToTable("Destinations");
                 });
@@ -153,6 +158,10 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("money");
 
+                    b.Property<int?>("RoomServiceId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
                     b.Property<int?>("RoomTypeId")
                         .HasColumnType("int");
 
@@ -163,11 +172,67 @@ namespace AhmedovTravel.Infrastructure.Migrations
 
                     b.HasIndex("HotelId");
 
+                    b.HasIndex("RoomServiceId");
+
                     b.HasIndex("RoomTypeId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.RoomService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("nvarchar(75)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<decimal>("PricePerPerson")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("money");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RoomServices");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A Small Pizza, with small french fries and a bottle of Coca-Cola 350ml.",
+                            ImageUrl = "https://app.lazizpizzaa.com/storage/app/public/product/2022-01-21-61ea8774799d1.png",
+                            IsActive = false,
+                            PricePerPerson = 15m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "A Beef Burger, with medium french fries, and a Coca-Cola 250ml",
+                            ImageUrl = "https://media.istockphoto.com/id/1344002306/photo/delicious-cheeseburger-with-cola-and-potato-fries-on-the-white-background-fast-food-concept.jpg?s=612x612&w=0&k=20&c=B8kZWz6zqmB11e4bIYt5rJ0U9aQ21AfZGgvT_JPIxqA=",
+                            IsActive = false,
+                            PricePerPerson = 20m
+                        });
                 });
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.RoomType", b =>
@@ -200,6 +265,54 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Transport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("TransportType")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Transports");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "https://media.istockphoto.com/id/492620954/photo/classical-red-bus.jpg?s=612x612&w=0&k=20&c=U2P9mlO8D7xZCYjRfifEkWxdUHp7JH7XPBn2dB1c9Qs=",
+                            IsActive = false,
+                            TransportType = "Bus"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "https://media.istockphoto.com/id/155439315/photo/passenger-airplane-flying-above-clouds-during-sunset.jpg?s=612x612&w=0&k=20&c=LJWadbs3B-jSGJBVy9s0f8gZMHi2NvWFXa3VJ2lFcL0=",
+                            IsActive = false,
+                            TransportType = "Airplane"
+                        });
+                });
+
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -211,9 +324,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DestinationId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -261,8 +371,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DestinationId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -438,7 +546,13 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("HotelId");
 
+                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Transport", "Transport")
+                        .WithMany()
+                        .HasForeignKey("TransportId");
+
                     b.Navigation("Hotel");
+
+                    b.Navigation("Transport");
                 });
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Hotel", b =>
@@ -465,6 +579,12 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .WithMany("Rooms")
                         .HasForeignKey("HotelId");
 
+                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.RoomService", "RoomService")
+                        .WithMany()
+                        .HasForeignKey("RoomServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.RoomType", "RoomType")
                         .WithMany()
                         .HasForeignKey("RoomTypeId");
@@ -473,14 +593,23 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .WithMany("UserRooms")
                         .HasForeignKey("UserId");
 
+                    b.Navigation("RoomService");
+
                     b.Navigation("RoomType");
                 });
 
-            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.User", b =>
+            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.RoomService", b =>
                 {
-                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.Destination", null)
-                        .WithMany("UserChosenDestination")
-                        .HasForeignKey("DestinationId");
+                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.User", null)
+                        .WithMany("UserRoomServices")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.Transport", b =>
+                {
+                    b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.User", null)
+                        .WithMany("UserTransport")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("AhmedovTravel.Infrastructure.Data.Entities.UserDestination", b =>
@@ -557,8 +686,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
                 {
                     b.Navigation("Hotels");
 
-                    b.Navigation("UserChosenDestination");
-
                     b.Navigation("UsersDestinations");
                 });
 
@@ -576,7 +703,11 @@ namespace AhmedovTravel.Infrastructure.Migrations
                 {
                     b.Navigation("UserHotels");
 
+                    b.Navigation("UserRoomServices");
+
                     b.Navigation("UserRooms");
+
+                    b.Navigation("UserTransport");
 
                     b.Navigation("UsersDestinations");
                 });

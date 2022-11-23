@@ -8,7 +8,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 {
     public class RoomService
     {
-        [Required]
+        [Key]
         public int Id { get; set; }
 
         [Required]

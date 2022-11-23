@@ -157,7 +157,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasColumnType("money");
 
                     b.Property<int?>("RoomServiceId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("RoomTypeId")
@@ -218,8 +217,8 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "A Small Pizza, with small french fries, small chicken nuggets portion and a bottle of Coca-Cola 350ml.",
-                            ImageUrl = "https://store.irabwah.com/image/cache/catalog/Chicken%20Tikka%20Pizza,%20Nuggets,%20Fries%20and%20Coke/Chicken%20tikka%20pizza%20(1)-500x500.jpg",
+                            Description = "A Small Pizza, with small french fries and a bottle of Coca-Cola 350ml.",
+                            ImageUrl = "https://app.lazizpizzaa.com/storage/app/public/product/2022-01-21-61ea8774799d1.png",
                             IsActive = false,
                             PricePerPerson = 15m
                         },
@@ -579,9 +578,7 @@ namespace AhmedovTravel.Infrastructure.Migrations
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.RoomService", "RoomService")
                         .WithMany()
-                        .HasForeignKey("RoomServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomServiceId");
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.RoomType", "RoomType")
                         .WithMany()

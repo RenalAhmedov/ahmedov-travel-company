@@ -31,6 +31,7 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Column(TypeName = "money")]
         [Precision(18,2)]
         public decimal PricePerNight { get; set; }
+
         public ICollection<Hotel> HotelRooms { get; set; } = new List<Hotel>();
 
         [Required]

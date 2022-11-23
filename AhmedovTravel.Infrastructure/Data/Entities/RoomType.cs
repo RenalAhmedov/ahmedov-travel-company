@@ -8,7 +8,6 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
         [Key]
         public int Id { get; set; }
 
-
         [Required]
         [MaxLength(RoomTypeConstants.RoomTypeMaxLength)]
         public string Name { get; set; }
