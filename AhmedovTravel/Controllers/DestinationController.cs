@@ -86,7 +86,7 @@ namespace AhmedovTravel.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            var destination = await destinationService.DestinationDetailsById(id); //check
+            var destination = await destinationService.DestinationDetailsById(id);
 
             var model = new EditDestinationViewModel()
             {
