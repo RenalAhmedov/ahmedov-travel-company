@@ -108,7 +108,7 @@ namespace AhmedovTravel.Core.Services
         public async Task<IEnumerable<AllDestinationsViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Destination>()
-               .Where(c => c.IsActive) //check
+               .Where(c => c.IsActive)
                .OrderBy(d => d.Id)
                .Select(d => new AllDestinationsViewModel()
                {
