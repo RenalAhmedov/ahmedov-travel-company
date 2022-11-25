@@ -11,20 +11,18 @@
             <img class="card-img-top" style="width: 18rem;"
              src="@transport.ImageUrl" alt="Transport Image">
             <div class="card-body">
+
                 <h5 class="card-title mt-1">@transport.TransportType</h5>
             </div>
-            @if (User?.Identity?.IsAuthenticated ?? false)
-            {
-                <form class="input-group-sm" asp-route-destinationId="@transport.Id" asp-controller="Destination" asp-action="AddToCollection" method="post">
-                    <input type="submit" value="Select" class="fs-6 btn btn-success mb-3 p-2" />
-                </form>
-@*                <form class="input-group-sm" asp-route-Id="@transport.Id" asp-controller="Destination" asp-action="Edit" method="get">
-                    <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Edit" />
-                </form>
-                <form class="input-group-sm" asp-route-Id="@transport.Id" asp-controller="Destination" asp-action="Delete" method="post">
-                    <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Delete" />
-                </form>*@
-            }
+            <form class="input-group-sm" asp-route-transportId="@transport.Id" asp-controller="Transport" asp-action="AddToWatchlist" method="post">
+                <input type="submit" value="Pick" class="fs-6 btn btn-success mb-3 p-2" />
+            </form>
+            @*                <form class="input-group-sm" asp-route-Id="@transport.Id" asp-controller="Destination" asp-action="Edit" method="get">
+        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Edit" />
+        </form>
+        <form class="input-group-sm" asp-route-Id="@transport.Id" asp-controller="Destination" asp-action="Delete" method="post">
+        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Delete" />
+        </form>*@
         </div>
     }
 </div>

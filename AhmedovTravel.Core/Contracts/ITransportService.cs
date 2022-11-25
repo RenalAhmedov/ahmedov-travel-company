@@ -10,7 +10,7 @@ namespace AhmedovTravel.Core.Contracts
 {
     public interface ITransportService
     {
-        Task<IEnumerable<TransportViewModel>> ShowTransportCollectionAsync(string transportId);
         Task<IEnumerable<TransportViewModel>> GetAllAsync();
+        Task<IEnumerable<TransportViewModel>> AddTransportToWatchlist(string userId);
     }
 }

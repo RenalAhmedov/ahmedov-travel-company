@@ -21,6 +21,25 @@ namespace AhmedovTravel.Core.Services
             repo = _repo;
         }
 
+        public async Task<IEnumerable<TransportViewModel>> AddTransportToWatchlist(string userId)
+        {
+            var user = await repo.All<User>()
+               .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            return user.UserTransport
+                .Select(t => new TransportViewModel()
+                {
+                    Id = t.Id,
+                    TransportType = t.TransportType,
+                    ImageUrl = t.ImageUrl,
+                });
+        }
+
         public async Task<IEnumerable<TransportViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Transport>()
@@ -31,14 +50,9 @@ namespace AhmedovTravel.Core.Services
                     Id = t.Id,
                     TransportType = t.TransportType,
                     ImageUrl = t.ImageUrl,
-                   
+
                 })
                 .ToListAsync();
-        }
-
-        public Task<IEnumerable<TransportViewModel>> ShowTransportCollectionAsync(string transportId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

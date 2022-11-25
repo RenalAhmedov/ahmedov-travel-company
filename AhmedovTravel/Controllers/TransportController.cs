@@ -19,16 +19,16 @@ namespace AhmedovTravel.Controllers
         {
             var model = await transportService.GetAllAsync();
 
-            return View(model);
+            return View("All", model);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ShowDestinationCollection()
+        [HttpPost]
+        public async Task<IActionResult> AddToWatchlist()
         {
             var userId = User.Id();
-            var model = await transportService.ShowTransportCollectionAsync(userId);
+            var model = await transportService.AddTransportToWatchlist(userId);
 
-            return View("Mine", model);
+            return View(model);
         }
     }
 }

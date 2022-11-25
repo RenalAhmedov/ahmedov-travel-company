@@ -166,6 +166,5 @@ namespace AhmedovTravel.Core.Services
                     Price = d.Destination.Price
                 });
         }
-
     }
 }
