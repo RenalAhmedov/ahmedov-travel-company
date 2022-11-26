@@ -80,8 +80,8 @@ namespace AhmedovTravel.Core.Services
             return user.UserTransport
                 .Select(d => new TransportViewModel()
                 {
-                    //Id = d.Id,
-                    TransportType = d.TransportType,
+                    Id = d.Id,
+                    TransportType = d.TransportType,     //check
                     ImageUrl = d.ImageUrl,
                 });
         }
