@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AhmedovTravel.Infrastructure.Migrations
 {
-    public partial class DBinitializationNew : Migration
+    public partial class DBinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -299,7 +299,7 @@ namespace AhmedovTravel.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoomTypeId = table.Column<int>(type: "int", nullable: true),
-                    RoomServiceId = table.Column<int>(type: "int", nullable: false),
+                    RoomServiceId = table.Column<int>(type: "int", nullable: true),
                     Persons = table.Column<int>(type: "int", maxLength: 3, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PricePerNight = table.Column<decimal>(type: "money", precision: 18, scale: 2, nullable: false),
@@ -324,8 +324,7 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         name: "FK_Rooms_RoomServices_RoomServiceId",
                         column: x => x.RoomServiceId,
                         principalTable: "RoomServices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Rooms_RoomTypes_RoomTypeId",
                         column: x => x.RoomTypeId,

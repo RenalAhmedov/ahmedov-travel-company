@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AhmedovTravel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221123145110_DBinitializationNew")]
-    partial class DBinitializationNew
+    [Migration("20221126150654_DBinit")]
+    partial class DBinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,7 +159,6 @@ namespace AhmedovTravel.Infrastructure.Migrations
                         .HasColumnType("money");
 
                     b.Property<int?>("RoomServiceId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("RoomTypeId")
@@ -581,9 +580,7 @@ namespace AhmedovTravel.Infrastructure.Migrations
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.RoomService", "RoomService")
                         .WithMany()
-                        .HasForeignKey("RoomServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomServiceId");
 
                     b.HasOne("AhmedovTravel.Infrastructure.Data.Entities.RoomType", "RoomType")
                         .WithMany()

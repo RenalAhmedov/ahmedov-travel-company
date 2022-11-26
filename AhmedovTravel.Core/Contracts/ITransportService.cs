@@ -1,16 +1,14 @@
 ﻿using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Core.Models.Transport;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AhmedovTravel.Core.Contracts
 {
     public interface ITransportService
     {
         Task<IEnumerable<TransportViewModel>> GetAllAsync();
-        Task<IEnumerable<TransportViewModel>> AddTransportToWatchlist(string userId);
+        Task AddDestinationToCollectionAsync(int transportId, string userId);
+        Task<IEnumerable<TransportViewModel>> ShowTransportCollectionAsync(string userId);
+
+        Task<TransportViewModel> TransportDetailsById(int id);
     }
 }

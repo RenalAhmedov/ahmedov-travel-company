@@ -23,12 +23,27 @@ namespace AhmedovTravel.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToWatchlist()
+        public async Task<IActionResult> AddToCollection(int transportId)
         {
-            var userId = User.Id();
-            var model = await transportService.AddTransportToWatchlist(userId);
+            try
+            {
+                var userId = User.Id();
+                await transportService.AddDestinationToCollectionAsync(transportId, userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-            return View(model);
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ShowTransportCollectionById(int userId)
+        {
+            var model = await transportService.TransportDetailsById(userId);
+
+            return View("Mine", model);
         }
     }
 }

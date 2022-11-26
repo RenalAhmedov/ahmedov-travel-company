@@ -21,23 +21,34 @@ namespace AhmedovTravel.Core.Services
             repo = _repo;
         }
 
-        public async Task<IEnumerable<TransportViewModel>> AddTransportToWatchlist(string userId)
+        public async Task AddDestinationToCollectionAsync(int transportId, string userId)
         {
             var user = await repo.All<User>()
-               .FirstOrDefaultAsync(u => u.Id == userId);
+                 .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
             {
                 throw new ArgumentException("Invalid user ID");
             }
 
-            return user.UserTransport
-                .Select(t => new TransportViewModel()
+            var transport = await repo.All<Transport>()
+                 .FirstOrDefaultAsync(d => d.Id == transportId);
+
+            if (transport == null)
+            {
+                throw new ArgumentException("Invalid Transport ID");
+            }
+
+            if (!user.UserTransport.Any(d => d.Id == transportId))
+            {
+                user.UserTransport.Add(new Transport()
                 {
-                    Id = t.Id,
-                    TransportType = t.TransportType,
-                    ImageUrl = t.ImageUrl,
+                    TransportType = transport.TransportType,
+                    ImageUrl = transport.ImageUrl
+                  
                 });
+            }
+            await repo.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TransportViewModel>> GetAllAsync()
@@ -53,6 +64,41 @@ namespace AhmedovTravel.Core.Services
 
                 })
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TransportViewModel>> ShowTransportCollectionAsync(string userId)
+        {
+            var user = await repo.All<User>()
+                .Include(u => u.UserTransport)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            return user.UserTransport
+                .Select(d => new TransportViewModel()
+                {
+                    //Id = d.Id,
+                    TransportType = d.TransportType,
+                    ImageUrl = d.ImageUrl,
+                });
+        }
+
+        public async Task<TransportViewModel> TransportDetailsById(int id)
+        {
+            return await repo.AllReadonly<Transport>()
+               .Where(h => h.IsActive)
+               .Where(h => h.Id == id)
+               .Select(h => new TransportViewModel()
+               {
+                   Id = h.Id,
+                   TransportType = h.TransportType,
+                   ImageUrl = h.ImageUrl,
+
+               })
+               .FirstAsync();
         }
     }
 }
