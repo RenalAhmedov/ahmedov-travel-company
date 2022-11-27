@@ -3,7 +3,6 @@ using AhmedovTravel.Core.Models.Transport;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace AhmedovTravel.Core.Services
 {
@@ -69,7 +68,7 @@ namespace AhmedovTravel.Core.Services
 
             if (user == null)
             {
-                throw new ArgumentException("Invalid user ID");
+                throw new ArgumentException("Invalid user ID");   
             }
 
             var transport = user.UserTransport.FirstOrDefault(m => m.Id == transportId);
