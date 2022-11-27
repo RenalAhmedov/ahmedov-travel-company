@@ -1,5 +1,6 @@
 ﻿using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Core.Models.Transport;
+using AhmedovTravel.Infrastructure.Data.Entities;
 
 namespace AhmedovTravel.Core.Contracts
 {

@@ -49,7 +49,7 @@ namespace AhmedovTravel.Core.Services
         public async Task<IEnumerable<TransportViewModel>> GetAllAsync() // problem here gets all transport even the user's
         {
             return await repo.AllReadonly<Transport>()
-                .Where(c => c.IsActive )
+                .Where(c => c.IsActive && c.Id == 1 || c.Id == 2)
                 .OrderBy(t => t.Id)
                 .Select(t => new TransportViewModel()
                 {
