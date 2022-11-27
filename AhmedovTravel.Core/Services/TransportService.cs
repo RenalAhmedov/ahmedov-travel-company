@@ -46,7 +46,7 @@ namespace AhmedovTravel.Core.Services
             await repo.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TransportViewModel>> GetAllAsync() // problem here gets all transport even the user's
+        public async Task<IEnumerable<TransportViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Transport>()
                 .Where(c => c.IsActive && c.Id == 1 || c.Id == 2)
@@ -59,6 +59,27 @@ namespace AhmedovTravel.Core.Services
 
                 })
                 .ToListAsync();
+        }
+
+        public async Task RemoveTransportFromCollectionAsync(int transportId, string userId)
+        {
+            var user = await repo.All<User>()
+                .Include(u => u.UserTransport)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            var transport = user.UserTransport.FirstOrDefault(m => m.Id == transportId);
+
+            if (transport != null)
+            {
+                user.UserTransport.Remove(transport);
+                
+                await repo.SaveChangesAsync();
+            }
         }
 
         public async Task<IEnumerable<TransportViewModel>> ShowTransportCollectionAsync(string userId)
@@ -76,7 +97,7 @@ namespace AhmedovTravel.Core.Services
                 .Select(d => new TransportViewModel()
                 {
                     Id = d.Id,
-                    TransportType = d.TransportType,     //check
+                    TransportType = d.TransportType,
                     ImageUrl = d.ImageUrl,
                 });
         }

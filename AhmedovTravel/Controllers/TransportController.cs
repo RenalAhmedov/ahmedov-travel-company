@@ -46,5 +46,15 @@ namespace AhmedovTravel.Controllers
 
             return View("Mine", model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromCollection(int transportId)
+        {
+            var userId = User.Id();
+
+            await transportService.RemoveTransportFromCollectionAsync(transportId, userId);
+
+            return RedirectToAction(nameof(ShowTransportCollection));
+        }
     }
 }

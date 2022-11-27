@@ -158,7 +158,6 @@ namespace AhmedovTravel.Controllers
             return View(model);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Delete(int id, AllDestinationsViewModel model)
         {
