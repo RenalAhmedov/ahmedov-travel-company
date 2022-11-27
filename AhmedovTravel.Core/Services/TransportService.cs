@@ -76,6 +76,7 @@ namespace AhmedovTravel.Core.Services
 
             if (transport != null)
             {
+                transport.IsActive = false;
                 user.UserTransport.Remove(transport);
                 
                 await repo.SaveChangesAsync();
