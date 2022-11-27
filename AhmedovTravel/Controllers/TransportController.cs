@@ -39,7 +39,7 @@ namespace AhmedovTravel.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowDestinationCollection()
+        public async Task<IActionResult> ShowTransportCollection()
         {
             var userId = User.Id();
             var model = await transportService.ShowTransportCollectionAsync(userId);

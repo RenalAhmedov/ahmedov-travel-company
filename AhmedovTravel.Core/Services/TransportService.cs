@@ -1,14 +1,9 @@
 ﻿using AhmedovTravel.Core.Contracts;
-using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Core.Models.Transport;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AhmedovTravel.Core.Services
 {
@@ -51,10 +46,10 @@ namespace AhmedovTravel.Core.Services
             await repo.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TransportViewModel>> GetAllAsync()
+        public async Task<IEnumerable<TransportViewModel>> GetAllAsync() // problem here gets all transport even the user's
         {
             return await repo.AllReadonly<Transport>()
-                .Where(c => c.IsActive)
+                .Where(c => c.IsActive )
                 .OrderBy(t => t.Id)
                 .Select(t => new TransportViewModel()
                 {
