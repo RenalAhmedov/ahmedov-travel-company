@@ -1,6 +1,7 @@
 using AhmedovTravel.Infrastructure.Data.Entities;
 using AhmedovTravel.Infrastrucutre.Data;
 using AhmedovTravel.ModelBinders;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +17,8 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequiredLength = 5;
 })
-
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+  .AddRoles<IdentityRole>()
+  .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

@@ -1,4 +1,5 @@
-﻿using AhmedovTravel.Infrastructure.Data.Entities;
+﻿using AhmedovTravel.Extensions;
+using AhmedovTravel.Infrastructure.Data.Entities;
 using AhmedovTravel.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,12 +12,16 @@ namespace AhmedovTravel.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserController(UserManager<User> _userManager,
-           SignInManager<User> _signInManager)
+        public UserController(
+           UserManager<User> _userManager,
+           SignInManager<User> _signInManager,
+           RoleManager<IdentityRole> _roleManager)
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            roleManager = _roleManager;
         }
 
         [HttpGet]
@@ -58,6 +63,28 @@ namespace AhmedovTravel.Controllers
                 ModelState.AddModelError("", item.Description);
             }
             return View(model);
+        }
+
+        public async Task<IActionResult> AddUserToRole()
+        {
+            var roleName = "Administrator";
+            var roleExists = await roleManager.RoleExistsAsync(roleName);
+
+            if (roleExists)
+            {
+                var user = await userManager.GetUserAsync(User);
+
+                if (user.Email == "admin@mail.com")
+                {
+                    var result = await userManager.AddToRoleAsync(user, roleName);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("All", "Destination");
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
