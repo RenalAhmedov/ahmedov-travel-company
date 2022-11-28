@@ -17,7 +17,7 @@
     <link href="css/styles.css" rel="stylesheet" />
 </head>
 
-    <!-- Navigation-->
+<!-- Navigation-->
 <body id="page-top">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
@@ -39,9 +39,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="ShowDestinationCollection">My Destination</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="Add">Add Destinations</a>
-                        </li>
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="Add">Add Destinations</a>
+                            </li>
+                        }
                     }
                 </ul>
                 <partial name="_LoginPartial" />
