@@ -68,6 +68,8 @@ namespace AhmedovTravel.Controllers
         public async Task<IActionResult> AddUserToRole()
         {
             var roleName = "Administrator";
+            var role = new IdentityRole("Administrator");
+            await roleManager.CreateAsync(role);
             var roleExists = await roleManager.RoleExistsAsync(roleName);
 
             if (roleExists)
