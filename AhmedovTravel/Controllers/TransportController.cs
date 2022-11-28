@@ -27,7 +27,7 @@ namespace AhmedovTravel.Controllers
             try
             {
                 var userId = User.Id();
-                await transportService.AddDestinationToCollectionAsync(transportId, userId);
+                await transportService.AddTransportToCollectionAsync(transportId, userId);
             }
             catch (Exception)
             {

@@ -15,7 +15,7 @@ namespace AhmedovTravel.Core.Services
             repo = _repo;
         }
 
-        public async Task AddDestinationToCollectionAsync(int transportId, string userId)
+        public async Task AddTransportToCollectionAsync(int transportId, string userId)
         {
             var user = await repo.All<User>()
                  .FirstOrDefaultAsync(u => u.Id == userId);
