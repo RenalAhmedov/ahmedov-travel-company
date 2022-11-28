@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Administration\**" />
+    <Content Remove="Areas\Administration\**" />
+    <EmbeddedResource Remove="Areas\Administration\**" />
+    <None Remove="Areas\Administration\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\js\site.js" />
   </ItemGroup>
 
@@ -25,10 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Administration\Controllers\" />
-    <Folder Include="Areas\Administration\Data\" />
-    <Folder Include="Areas\Administration\Models\" />
-    <Folder Include="Areas\Administration\Views\" />
+    <Folder Include="Areas\Administrator\Controllers\" />
+    <Folder Include="Areas\Administrator\Data\" />
+    <Folder Include="Areas\Administrator\Models\" />
+    <Folder Include="Areas\Administrator\Views\" />
   </ItemGroup>
 
 </Project>
