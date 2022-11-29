@@ -65,13 +65,27 @@
     </nav>
 
     <!-- Masthead-->
-    <header class="masthead">
-        <div class="container">
-            <main>@RenderBody()</main>
-            <div class="masthead-subheading">Welcome To Ahmedov Travel</div>
-            <div class="masthead-heading text-uppercase">Pack up the essentials and let's go!</div>
-        </div>
-    </header>
+    @if (this.User.IsInRole("Administrator"))
+    {
+        <header class="masthead">
+            <div class="container">
+                <main>@RenderBody()</main>
+                <div class="masthead-subheading">Hello Admin!</div>
+                <div class="masthead-heading text-uppercase">Now you can manage the travel system.</div>
+            </div>
+        </header>
+    }
+    else
+    {
+        <header class="masthead">
+            <div class="container">
+                <main>@RenderBody()</main>
+                <div class="masthead-subheading">Welcome To Ahmedov Travel</div>
+                <div class="masthead-heading text-uppercase">Pack up the essentials and let's go!</div>
+            </div>
+        </header>
+    }
+
 
     <!-- Footer-->
     <footer class="footer py-4">
