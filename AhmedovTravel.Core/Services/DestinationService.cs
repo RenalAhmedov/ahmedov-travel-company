@@ -47,12 +47,21 @@ namespace AhmedovTravel.Core.Services
                 throw new ArgumentException("Invalid Destination ID");
             }
 
-            if (destination.IsChosen == true)
-            {
-                throw new ArgumentException("You already have that destination chosen.");
-            }
+            //if (destination.Id == 1)
+            //{
+            //    destination.IsChosen = false;
+            //}
+            //else if (destination.Id == 2)
+            //{
+            //    destination.IsChosen = false;
+            //}
 
-            destination.IsChosen = true;
+            //if (destination.IsChosen == true)
+            //{
+            //    throw new ArgumentException("You already have that destination chosen.");
+            //}
+
+            //destination.IsChosen = true;
 
             if (!user.UsersDestinations.Any(d => d.DestinationId == destinationId))
             {
@@ -135,8 +144,8 @@ namespace AhmedovTravel.Core.Services
                 .Include(u => u.UsersDestinations)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var destinationSelected = await repo.All<Destination>()
-               .FirstOrDefaultAsync(d => d.Id == destinationId);
+            //var destinationSelected = await repo.All<Destination>()
+            //   .FirstOrDefaultAsync(d => d.Id == destinationId);
 
             if (user == null)
             {
@@ -147,7 +156,7 @@ namespace AhmedovTravel.Core.Services
 
             if (destination != null)
             {
-                destinationSelected.IsChosen = false;
+                //destinationSelected.IsChosen = false;
                 user.UsersDestinations.Remove(destination);
 
                 await repo.SaveChangesAsync();
