@@ -9,9 +9,13 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Administration\**" />
+    <Compile Remove="Areas\Administrator\**" />
     <Content Remove="Areas\Administration\**" />
+    <Content Remove="Areas\Administrator\**" />
     <EmbeddedResource Remove="Areas\Administration\**" />
+    <EmbeddedResource Remove="Areas\Administrator\**" />
     <None Remove="Areas\Administration\**" />
+    <None Remove="Areas\Administrator\**" />
   </ItemGroup>
 
   <ItemGroup>
