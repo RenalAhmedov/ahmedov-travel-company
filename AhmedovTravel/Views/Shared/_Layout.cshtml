@@ -28,9 +28,18 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="All">All Destinations</a>
-                    </li>
+                    @if (this.User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Destination" asp-action="All">All Destinations</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="All">All Destinations</a>
+                        </li>
+                    }
                     @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
                     {
                         @if (this.User.IsInRole("Administrator"))
