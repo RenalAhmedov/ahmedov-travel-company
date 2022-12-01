@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Compile Include="Areas\Administrator\Controllers\DestinationController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\HotelController.cs" />
   </ItemGroup>
 
   <ItemGroup>

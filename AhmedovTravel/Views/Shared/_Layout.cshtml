@@ -33,11 +33,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Destination" asp-action="All">All Destinations</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="All">All Hotels</a>
+                        </li>
                     }
                     else
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="All">All Destinations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="All">All Hotels</a>
                         </li>
                     }
                     @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
@@ -47,6 +53,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Destination" asp-action="Add">Add Destinations</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="Add">Add Hotel</a>
+                            </li>
                         }
                         else
                         {
@@ -55,6 +64,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="ShowDestinationCollection">My Destination</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="ShowHotelCollection">My Hotel</a>
                             </li>
                         }
                     }
