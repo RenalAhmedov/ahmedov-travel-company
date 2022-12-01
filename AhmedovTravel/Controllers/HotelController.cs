@@ -1,8 +1,6 @@
 ﻿using AhmedovTravel.Core.Contracts;
-using AhmedovTravel.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 
 namespace AhmedovTravel.Controllers
 {

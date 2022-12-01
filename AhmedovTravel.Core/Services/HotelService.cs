@@ -15,6 +15,19 @@ namespace AhmedovTravel.Core.Services
             repo = _repo;
         }
 
+        public async Task AddHotelAsync(AddHotelViewModel model)
+        {
+            var hotel = new Hotel()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                HotelRating = model.HotelRating,
+            };
+            await repo.AddAsync(hotel);
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<HotelViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Hotel>()

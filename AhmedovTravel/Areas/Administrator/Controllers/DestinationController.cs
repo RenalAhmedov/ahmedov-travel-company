@@ -1,6 +1,5 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Models.Destination;
-using AhmedovTravel.Infrastructure.DataConstants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

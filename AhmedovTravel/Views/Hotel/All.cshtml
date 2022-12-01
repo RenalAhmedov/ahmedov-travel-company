@@ -2,8 +2,9 @@
 @model IEnumerable<HotelViewModel>
 
 @{
-    ViewBag.Title = "All Destinations";
+    ViewBag.Title = "All Hotels";
 }
+
 <div class="text-center row">
     @foreach (var hotel in Model)
     {
@@ -14,7 +15,6 @@
 
                 <h5 class="card-title mt-1">@hotel.Name</h5>
                 <p class="card-title mt-1">@hotel.Description</p>
-                <p class="mb-0">Price: @hotel.ImageUrl</p>
                 <p class="mb-0">Rating: @hotel.HotelRating</p>
             </div>
             @if (User?.Identity?.IsAuthenticated ?? false)
@@ -34,15 +34,6 @@
                         <input type="submit" value="Select" class="fs-6 btn btn-success mb-3 p-2" />
                     </form>
                 }
-                @* <form class="input-group-sm" asp-route-destinationId="@destination.Id" asp-controller="Destination" asp-action="AddToCollection" method="post">
-        <input type="submit" value="Select" class="fs-6 btn btn-success mb-3 p-2" />
-        </form>*@
-                @*                <form class="input-group-sm" asp-route-Id="@destination.Id" asp-controller="Destination" asp-action="Edit" method="get">
-        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Edit" />
-        </form>
-        <form class="input-group-sm" asp-route-Id="@destination.Id" asp-controller="Destination" asp-action="Delete" method="post">
-        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Delete" />
-        </form>*@
             }
         </div>
     }
