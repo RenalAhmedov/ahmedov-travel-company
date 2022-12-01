@@ -104,40 +104,39 @@ namespace AhmedovTravel.Areas.Administrator.Controllers
         }
 
 
-        //[HttpGet]
-        //[Authorize(Roles = ("Administrator"))]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    if ((await hotelService.Exists(id)) == false)
-        //    {
-        //        return RedirectToAction(nameof(All));
-        //    }
+        [HttpGet]
+        [Authorize(Roles = ("Administrator"))]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if ((await hotelService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
 
-        //    var destination = await hotelService.DestinationDetailsById(id);
-        //    var model = new AllDestinationsViewModel()
-        //    {
-        //        Title = destination.Title,
-        //        Town = destination.Town,
-        //        Price = destination.Price,
-        //        ImageUrl = destination.ImageUrl,
-        //        Rating = destination.Rating
-        //    };
+            var hotel = await hotelService.HotelDetailsById(id);
+            var model = new HotelViewModel()
+            {
+                Name = hotel.Name,
+                Description = hotel.Description,
+                ImageUrl = hotel.ImageUrl,
+                HotelRating = hotel.HotelRating,
+            };
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
-        //[HttpPost]
-        //[Authorize(Roles = ("Administrator"))]
-        //public async Task<IActionResult> Delete(int id, AllDestinationsViewModel model)
-        //{
-        //    if ((await hotelService.Exists(id)) == false)
-        //    {
-        //        return RedirectToAction(nameof(All));
-        //    }
+        [HttpPost]
+        [Authorize(Roles = ("Administrator"))]
+        public async Task<IActionResult> Delete(int id, HotelViewModel model)
+        {
+            if ((await hotelService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
 
-        //    await hotelService.Delete(id);
+            await hotelService.Delete(id);
 
-        //    return RedirectToAction(nameof(All));
-        //}
+            return RedirectToAction(nameof(All));
+        }
     }
 }

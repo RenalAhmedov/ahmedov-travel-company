@@ -29,6 +29,14 @@ namespace AhmedovTravel.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        public async Task Delete(int hotelId)
+        {
+            var hotel = await repo.GetByIdAsync<Hotel>(hotelId);
+            hotel.IsActive = false;
+
+            await repo.SaveChangesAsync();
+        }
+
         public async Task Edit(int hotelId, EditHotelViewModel model)
         {
             var hotel = await repo.GetByIdAsync<Hotel>(hotelId);

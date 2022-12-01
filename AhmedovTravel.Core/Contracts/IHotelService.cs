@@ -11,7 +11,7 @@ namespace AhmedovTravel.Core.Contracts
         //Task RemoveDestinationFromCollectionAsync(int destinationId, string userId);
         Task Edit(int hotelId, EditHotelViewModel model);
         Task<bool> Exists(int id);
-        //Task Delete(int destinationId);
+        Task Delete(int hotelId);
         Task<HotelViewModel> HotelDetailsById(int id);
     }
 }
