@@ -53,56 +53,55 @@ namespace AhmedovTravel.Areas.Administrator.Controllers
             }
         }
 
-        //[HttpGet]
-        //[Authorize(Roles = ("Administrator"))]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    if ((await hotelService.Exists(id)) == false)
-        //    {
-        //        return RedirectToAction(nameof(All));
-        //    }
+        [HttpGet]
+        [Authorize(Roles = ("Administrator"))]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if ((await hotelService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
 
-        //    var destination = await hotelService.DestinationDetailsById(id);
+            var hotel = await hotelService.HotelDetailsById(id);
 
-        //    var model = new EditDestinationViewModel()
-        //    {
-        //        Id = id,
-        //        Title = destination.Title,
-        //        Town = destination.Town,
-        //        ImageUrl = destination.ImageUrl,
-        //        Price = destination.Price,
-        //        Rating = destination.Rating,
-        //    };
+            var model = new EditHotelViewModel()
+            {
+                Id = id,
+                Name = hotel.Name,
+                Description = hotel.Description,
+                ImageUrl = hotel.ImageUrl,
+                HotelRating = hotel.HotelRating,
+            };
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
-        //[HttpPost]
-        //[Authorize(Roles = ("Administrator"))]
-        //public async Task<IActionResult> Edit(int id, EditDestinationViewModel model)
-        //{
-        //    if (id != model.Id)
-        //    {
-        //        ModelState.AddModelError("", "Something went wrong!");
-        //        return RedirectToAction(nameof(All));
-        //    }
+        [HttpPost]
+        [Authorize(Roles = ("Administrator"))]
+        public async Task<IActionResult> Edit(int id, EditHotelViewModel model)
+        {
+            if (id != model.Id)
+            {
+                ModelState.AddModelError("", "Something went wrong!");
+                return RedirectToAction(nameof(All));
+            }
 
-        //    if ((await hotelService.Exists(model.Id)) == false)
-        //    {
-        //        ModelState.AddModelError("", "Destination doesn't exist");
+            if ((await hotelService.Exists(model.Id)) == false)
+            {
+                ModelState.AddModelError("", "Hotel doesn't exist");
 
-        //        return View(model);
-        //    }
+                return View(model);
+            }
 
-        //    if (ModelState.IsValid == false)
-        //    {
-        //        return View(model);
-        //    }
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
 
-        //    await hotelService.Edit(model.Id, model);
+            await hotelService.Edit(model.Id, model);
 
-        //    return RedirectToAction(nameof(All), new { model.Id });
-        //}
+            return RedirectToAction(nameof(All), new { model.Id });
+        }
 
 
         //[HttpGet]
