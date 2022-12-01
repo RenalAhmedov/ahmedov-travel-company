@@ -84,4 +84,9 @@
     <ProjectReference Include="..\AhmedovTravel.Core\AhmedovTravel.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Administrator\Views\Hotel\" />
+    <Folder Include="Views\Hotel\" />
+  </ItemGroup>
+
 </Project>

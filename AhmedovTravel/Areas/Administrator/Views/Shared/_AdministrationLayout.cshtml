@@ -30,6 +30,9 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Destination" asp-action="All">All Destinations</a>
+                    </li
+                     <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="All">All Hotels</a>
                     </li>
                     @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
                     {
@@ -37,6 +40,9 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Destination" asp-action="Add">Add Destinations</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="Add">Add Hotels</a>
                             </li>
                         }
                     }
