@@ -15,13 +15,13 @@ namespace AhmedovTravel.Controllers
         {
             hotelService = _hotelService;
         }
-        //[AllowAnonymous]
-        //public async Task<IActionResult> All()
-        //{
-        //    var model = await hotelService.GetAllAsync();
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
+        {
+            var model = await hotelService.GetAllAsync();
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> AddToCollection(int hotelId)

@@ -1,0 +1,49 @@
+﻿@using AhmedovTravel.Core.Models.Hotel
+@model IEnumerable<HotelViewModel>
+
+@{
+    ViewBag.Title = "All Destinations";
+}
+<div class="text-center row">
+    @foreach (var hotel in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@hotel.ImageUrl" alt="Hotel Image">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@hotel.Name</h5>
+                <p class="card-title mt-1">@hotel.Description</p>
+                <p class="mb-0">Price: @hotel.ImageUrl</p>
+                <p class="mb-0">Rating: @hotel.HotelRating</p>
+            </div>
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                if (User.IsInRole("Administration"))
+                {
+                    <form class="input-group-sm" asp-area="Administrator" asp-route-Id="@hotel.Id" asp-controller="Hotel" asp-action="Edit" method="get">
+                        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Edit" />
+                    </form>
+                    <form class="input-group-sm" asp-area="Administrator" asp-route-Id="@hotel.Id" asp-controller="Hotel" asp-action="Delete" method="post">
+                        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Delete" />
+                    </form>
+                }
+                else
+                {
+                    <form class="input-group-sm" asp-route-destinationId="@hotel.Id" asp-controller="Hotel" asp-action="AddToCollection" method="post">
+                        <input type="submit" value="Select" class="fs-6 btn btn-success mb-3 p-2" />
+                    </form>
+                }
+                @* <form class="input-group-sm" asp-route-destinationId="@destination.Id" asp-controller="Destination" asp-action="AddToCollection" method="post">
+        <input type="submit" value="Select" class="fs-6 btn btn-success mb-3 p-2" />
+        </form>*@
+                @*                <form class="input-group-sm" asp-route-Id="@destination.Id" asp-controller="Destination" asp-action="Edit" method="get">
+        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Edit" />
+        </form>
+        <form class="input-group-sm" asp-route-Id="@destination.Id" asp-controller="Destination" asp-action="Delete" method="post">
+        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Delete" />
+        </form>*@
+            }
+        </div>
+    }
+</div>
