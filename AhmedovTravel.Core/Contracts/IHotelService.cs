@@ -6,9 +6,9 @@ namespace AhmedovTravel.Core.Contracts
     {
         Task AddHotelAsync(AddHotelViewModel model);
         Task<IEnumerable<HotelViewModel>> GetAllAsync();
-        //Task AddDestinationToCollectionAsync(int destinationId, string userId);
-        //Task<IEnumerable<MineDestinationsViewModel>> ShowDestinationCollectionAsync(string userId);
-        //Task RemoveDestinationFromCollectionAsync(int destinationId, string userId);
+        Task AddHotelToCollectionAsync(int hotelId, string userId);
+        Task<IEnumerable<HotelViewModel>> ShowHotelCollectionAsync(string userId);
+        Task RemoveHotelFromCollectionAsync(int hotelId, string userId);
         Task Edit(int hotelId, EditHotelViewModel model);
         Task<bool> Exists(int id);
         Task Delete(int hotelId);

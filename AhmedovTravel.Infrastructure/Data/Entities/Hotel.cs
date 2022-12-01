@@ -32,5 +32,6 @@ namespace AhmedovTravel.Infrastructure.Data.Entities
 
         [Required]
         public bool IsActive { get; set; }
+
     }
 }
