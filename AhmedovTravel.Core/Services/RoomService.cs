@@ -1,5 +1,4 @@
 ﻿using AhmedovTravel.Core.Contracts;
-using AhmedovTravel.Core.Models.Hotel;
 using AhmedovTravel.Core.Models.Room;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
@@ -27,6 +26,38 @@ namespace AhmedovTravel.Core.Services
 
             };
             await repo.AddAsync(room);
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task AddRoomToCollectionAsync(int roomId, string userId)
+        {
+            var user = await repo.All<User>()
+                 .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            var room = await repo.All<Room>()
+                 .FirstOrDefaultAsync(d => d.Id == roomId);
+
+            if (room == null)
+            {
+                throw new ArgumentException("Invalid Hotel ID");
+            }
+
+            if (!user.UserRooms.Any(d => d.Id == roomId))
+            {
+                user.UserRooms.Add(new Room()
+                {
+                    Persons = room.Persons,
+                    PricePerNight = room.PricePerNight,
+                    ImageUrl = room.ImageUrl,
+                    RoomType = room.RoomType,
+                   /* IsChosen = true*/ //check
+                });
+            }
             await repo.SaveChangesAsync();
         }
 
@@ -93,6 +124,28 @@ namespace AhmedovTravel.Core.Services
                    RoomType = h.RoomType != null ? h.RoomType.Name : null //check
                })
                .FirstAsync();
+        }
+
+        public async Task<IEnumerable<RoomViewModel>> ShowRoomCollectionAsync(string userId)
+        {
+            var user = await repo.All<User>()
+               .Include(u => u.UserRooms)
+               .FirstOrDefaultAsync(u => u.Id == userId); //put where ischosen = false;
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            return user.UserRooms
+                .Select(d => new RoomViewModel()
+                {
+                    Id = d.Id,
+                    Persons = d.Persons,
+                    PricePerNight = d.PricePerNight,
+                    ImageUrl = d.ImageUrl,
+                    RoomType = d.RoomType != null ? d.RoomType.Name : null // CHECK
+                });
         }
     }
 }

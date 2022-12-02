@@ -1,4 +1,5 @@
 ﻿using AhmedovTravel.Core.Contracts;
+using AhmedovTravel.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,30 +23,30 @@ namespace AhmedovTravel.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddToCollection(int destinationId)
-        //{
-        //    try
-        //    {
-        //        var userId = User.Id();
-        //        await destinationService.AddDestinationToCollectionAsync(destinationId, userId);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> AddToCollection(int roomId)
+        {
+            try
+            {
+                var userId = User.Id();
+                await roomService.AddRoomToCollectionAsync(roomId, userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    return RedirectToAction(nameof(ShowDestinationCollection));
-        //}
+            return RedirectToAction(nameof(ShowDestinationCollection));
+        }
 
-        //[HttpGet]
-        //public async Task<IActionResult> ShowDestinationCollection()
-        //{
-        //    var userId = User.Id();
-        //    var model = await destinationService.ShowDestinationCollectionAsync(userId);
+        [HttpGet]
+        public async Task<IActionResult> ShowDestinationCollection()
+        {
+            var userId = User.Id();
+            var model = await roomService.ShowRoomCollectionAsync(userId);
 
-        //    return View("Mine", model);
-        //}
+            return View("Mine", model); // do
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> RemoveFromCollection(int destinationId)
