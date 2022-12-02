@@ -4,6 +4,7 @@ using AhmedovTravel.Core.Models.Hotel;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AhmedovTravel.Core.Services
 {
@@ -55,6 +56,7 @@ namespace AhmedovTravel.Core.Services
                     Description = hotel.Description,
                     HotelRating = hotel.HotelRating,
                     ImageUrl = hotel.ImageUrl,
+                    IsChosen = true //check
                 });
             }
             await repo.SaveChangesAsync();
@@ -89,7 +91,8 @@ namespace AhmedovTravel.Core.Services
         public async Task<IEnumerable<HotelViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Hotel>()
-              .Where(c => c.IsActive)
+              .Where(c => c.IsActive == true)
+              .Where(h => h.IsChosen == false) // check
               .OrderBy(d => d.Id)
               .Select(d => new HotelViewModel()
               {
@@ -133,6 +136,7 @@ namespace AhmedovTravel.Core.Services
 
             if (hotel != null)
             {
+                hotel.IsChosen = true;
                 user.UserHotels.Remove(hotel);
 
                 await repo.SaveChangesAsync();
@@ -143,7 +147,7 @@ namespace AhmedovTravel.Core.Services
         {
             var user = await repo.All<User>()
                 .Include(u => u.UserHotels)
-                .FirstOrDefaultAsync(u => u.Id == userId);
+                .FirstOrDefaultAsync(u => u.Id == userId); //put where ischosen = false;
 
             if (user == null)
             {
