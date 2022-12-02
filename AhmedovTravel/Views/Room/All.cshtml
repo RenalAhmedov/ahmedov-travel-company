@@ -1,0 +1,39 @@
+﻿@using AhmedovTravel.Core.Models.Room
+@model IEnumerable<RoomViewModel>
+
+@{
+    ViewBag.Title = "All Rooms";
+}
+<div class="text-center row">
+    @foreach (var Room in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@Room.ImageUrl" alt="Room Image">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@Room.Persons</h5>
+                <p class="card-title mt-1">@Room.PricePerNight</p>
+                <p class="mb-0">RoomType: @Room.RoomType</p>
+            </div>
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                if (User.IsInRole("Administration"))
+                {
+                    <form class="input-group-sm" asp-area="Administrator" asp-route-Id="@Room.Id" asp-controller="Room" asp-action="Edit" method="get">
+                        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Edit" />
+                    </form>
+                    <form class="input-group-sm" asp-area="Administrator" asp-route-Id="@Room.Id" asp-controller="Room" asp-action="Delete" method="post">
+                        <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Delete" />
+                    </form>
+                }
+                else
+                {
+                    <form class="input-group-sm" asp-route-destinationId="@Room.Id" asp-controller="Room" asp-action="AddToCollection" method="post">
+                        <input type="submit" value="Select" class="fs-6 btn btn-success mb-3 p-2" />
+                    </form>
+                }
+            }
+        </div>
+    }
+</div>

@@ -14,13 +14,13 @@ namespace AhmedovTravel.Controllers
             roomService = _roomService;
         }
 
-        //[AllowAnonymous]
-        //public async Task<IActionResult> All()
-        //{
-        //    var model = await destinationService.GetAllAsync();
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
+        {
+            var model = await roomService.GetAllAsync();
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> AddToCollection(int destinationId)

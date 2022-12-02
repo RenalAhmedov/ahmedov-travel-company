@@ -18,21 +18,21 @@ namespace AhmedovTravel.Areas.Administrator.Controllers
             roomService = _roomService;
         }
 
-        //[AllowAnonymous]
-        //public async Task<IActionResult> All()
-        //{
-        //    var model = await destinationService.GetAllAsync();
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
+        {
+            var model = await roomService.GetAllAsync();
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Add()
-        //{
-        //    var model = new AddDestinationViewModel();
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            var model = new AddRoomViewModel();
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> Add(AddDestinationViewModel model)
