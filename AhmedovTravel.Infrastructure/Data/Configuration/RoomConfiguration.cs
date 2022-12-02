@@ -17,7 +17,7 @@ namespace AhmedovTravel.Infrastructure.Data.Configuration
             builder.Property(c => c.IsActive)
                .HasDefaultValue(true);
 
-            builder.Property(c => c.IsActive)
+            builder.Property(c => c.IsChosen)
               .HasDefaultValue(false);
         }
     }
