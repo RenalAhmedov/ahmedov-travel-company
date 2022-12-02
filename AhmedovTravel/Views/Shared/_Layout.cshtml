@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="All">All Hotels</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Room" asp-action="All">All Rooms</a>
+                        </li>
                     }
                     else
                     {
@@ -44,6 +47,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="All">All Hotels</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="All">All Rooms</a>
                         </li>
                     }
                     @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
@@ -56,6 +62,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="Add">Add Hotel</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Room" asp-action="Add">Add Room</a>
+                            </li>
                         }
                         else
                         {
@@ -67,6 +76,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="ShowHotelCollection">My Hotel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="ShowRoomCollection">My Room</a>
                             </li>
                         }
                     }

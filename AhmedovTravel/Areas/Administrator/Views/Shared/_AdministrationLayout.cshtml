@@ -35,6 +35,10 @@
                      <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="All">All Hotels</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Room" asp-action="All">All Rooms</a>
+                    </li>
+
                     @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
                     {
                         @if (this.User.IsInRole("Administrator"))
@@ -44,6 +48,9 @@
                             </li>
                              <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="Add">Add Hotels</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Room" asp-action="Add">Add Rooms</a>
                             </li>
                         }
                     }
