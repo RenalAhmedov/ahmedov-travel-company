@@ -55,7 +55,7 @@ namespace AhmedovTravel.Core.Services
                     PricePerNight = room.PricePerNight,
                     ImageUrl = room.ImageUrl,
                     RoomType = room.RoomType,
-                   /* IsChosen = true*/ //check
+                    IsChosen = true //check
                 });
             }
             await repo.SaveChangesAsync();
