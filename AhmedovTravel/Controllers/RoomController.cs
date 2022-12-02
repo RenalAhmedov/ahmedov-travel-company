@@ -36,11 +36,11 @@ namespace AhmedovTravel.Controllers
                 throw;
             }
 
-            return RedirectToAction(nameof(ShowDestinationCollection));
+            return RedirectToAction(nameof(ShowRoomCollectionAsync));
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowDestinationCollection()
+        public async Task<IActionResult> ShowRoomCollectionAsync()
         {
             var userId = User.Id();
             var model = await roomService.ShowRoomCollectionAsync(userId);
