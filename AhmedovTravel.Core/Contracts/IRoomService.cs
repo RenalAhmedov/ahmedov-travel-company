@@ -5,7 +5,7 @@ namespace AhmedovTravel.Core.Contracts
 {
     public interface IRoomService
     {
-        //Task AddHotelAsync(AddHotelViewModel model);
+        Task AddRoomAsync(AddRoomViewModel model);
         Task<IEnumerable<RoomType>> GetRoomTypes();
         Task<IEnumerable<RoomViewModel>> GetAllAsync();
         //Task AddHotelToCollectionAsync(int hotelId, string userId);

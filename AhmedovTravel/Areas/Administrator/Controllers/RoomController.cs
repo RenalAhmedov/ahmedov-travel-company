@@ -1,5 +1,6 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Models.Destination;
+using AhmedovTravel.Core.Models.Room;
 using AhmedovTravel.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,31 +30,34 @@ namespace AhmedovTravel.Areas.Administrator.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            var model = new AddRoomViewModel();
+            var model = new AddRoomViewModel()
+            {
+                RoomTypes = await roomService.GetRoomTypes()
+            };
 
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Add(AddDestinationViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> Add(AddRoomViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-        //    try
-        //    {
-        //        await destinationService.AddDestinationAsync(model);
+            try
+            {
+                await roomService.AddRoomAsync(model);
 
-        //        return RedirectToAction(nameof(All));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ModelState.AddModelError("", "Something went wrong!");
-        //        return View(model);
-        //    }
-        //}
+                return RedirectToAction(nameof(All));
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Something went wrong!");
+                return View(model);
+            }
+        }
 
         //[HttpGet]
         //[Authorize(Roles = ("Administrator"))]

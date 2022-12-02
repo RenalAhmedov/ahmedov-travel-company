@@ -1,5 +1,4 @@
 ﻿using AhmedovTravel.Core.Contracts;
-using AhmedovTravel.Core.Models.Hotel;
 using AhmedovTravel.Core.Models.Room;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
@@ -15,10 +14,26 @@ namespace AhmedovTravel.Core.Services
         {
             repo = _repo;
         }
+
+        public async Task AddRoomAsync(AddRoomViewModel model)
+        {
+            var room = new Room()
+            {
+                Persons = model.Persons,
+                ImageUrl = model.ImageUrl,
+                PricePerNight = model.PricePerNight,
+                RoomTypeId = model.RoomTypeId,
+
+            };
+            await repo.AddAsync(room);
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<RoomViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Room>()
               .Where(c => c.IsActive == true)
+              .Include(rt => rt.RoomType) // check
               /*              .Where(h => h.IsChosen == false)*/ //check
               .OrderBy(d => d.Id)
               .Select(d => new RoomViewModel()
