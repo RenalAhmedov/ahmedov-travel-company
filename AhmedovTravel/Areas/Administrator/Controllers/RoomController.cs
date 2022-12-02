@@ -2,6 +2,7 @@
 using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Core.Models.Room;
 using AhmedovTravel.Core.Services;
+using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -59,92 +60,90 @@ namespace AhmedovTravel.Areas.Administrator.Controllers
             }
         }
 
-        //[HttpGet]
-        //[Authorize(Roles = ("Administrator"))]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    if ((await destinationService.Exists(id)) == false)
-        //    {
-        //        return RedirectToAction(nameof(All));
-        //    }
+        [HttpGet]
+        [Authorize(Roles = ("Administrator"))]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if ((await roomService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
 
-        //    var destination = await destinationService.DestinationDetailsById(id);
+            var room = await roomService.RoomDetailsById(id);
 
-        //    var model = new EditDestinationViewModel()
-        //    {
-        //        Id = id,
-        //        Title = destination.Title,
-        //        Town = destination.Town,
-        //        ImageUrl = destination.ImageUrl,
-        //        Price = destination.Price,
-        //        Rating = destination.Rating,
-        //    };
+            var model = new Core.Models.Room.EditRoomViewModel()
+            {
+                Id = id,
+                Persons = room.Persons,
+                PricePerNight = room.PricePerNight,
+                ImageUrl = room.ImageUrl,
+                RoomTypes = await roomService.GetRoomTypes() // check
+            };
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
-        //[HttpPost]
-        //[Authorize(Roles = ("Administrator"))]
-        //public async Task<IActionResult> Edit(int id, EditDestinationViewModel model)
-        //{
-        //    if (id != model.Id)
-        //    {
-        //        ModelState.AddModelError("", "Something went wrong!");
-        //        return RedirectToAction(nameof(All));
-        //    }
+        [HttpPost]
+        [Authorize(Roles = ("Administrator"))]
+        public async Task<IActionResult> Edit(int id, EditRoomViewModel model)
+        {
+            if (id != model.Id)
+            {
+                ModelState.AddModelError("", "Something went wrong!");
+                return RedirectToAction(nameof(All));
+            }
 
-        //    if ((await destinationService.Exists(model.Id)) == false)
-        //    {
-        //        ModelState.AddModelError("", "Destination doesn't exist");
+            if ((await roomService.Exists(model.Id)) == false)
+            {
+                ModelState.AddModelError("", "Destination doesn't exist");
 
-        //        return View(model);
-        //    }
+                return View(model);
+            }
 
-        //    if (ModelState.IsValid == false)
-        //    {
-        //        return View(model);
-        //    }
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
 
-        //    await destinationService.Edit(model.Id, model);
+            await roomService.Edit(model.Id, model);
 
-        //    return RedirectToAction(nameof(All), new { model.Id });
-        //}
+            return RedirectToAction(nameof(All), new { model.Id });
+        }
 
 
-        //[HttpGet]
-        //[Authorize(Roles = ("Administrator"))]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    if ((await destinationService.Exists(id)) == false)
-        //    {
-        //        return RedirectToAction(nameof(All));
-        //    }
+        [HttpGet]
+        [Authorize(Roles = ("Administrator"))]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if ((await roomService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
 
-        //    var destination = await destinationService.DestinationDetailsById(id);
-        //    var model = new AllDestinationsViewModel()
-        //    {
-        //        Title = destination.Title,
-        //        Town = destination.Town,
-        //        Price = destination.Price,
-        //        ImageUrl = destination.ImageUrl,
-        //        Rating = destination.Rating
-        //    };
+            var room = await roomService.RoomDetailsById(id);
+            var model = new RoomViewModel()
+            {
+                Persons = room.Persons,
+                ImageUrl = room.ImageUrl,
+                PricePerNight = room.PricePerNight,
+                RoomType = room.RoomType //check
+            };
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
-        //[HttpPost]
-        //[Authorize(Roles = ("Administrator"))]
-        //public async Task<IActionResult> Delete(int id, AllDestinationsViewModel model)
-        //{
-        //    if ((await destinationService.Exists(id)) == false)
-        //    {
-        //        return RedirectToAction(nameof(All));
-        //    }
+        [HttpPost]
+        [Authorize(Roles = ("Administrator"))]
+        public async Task<IActionResult> Delete(int id, RoomViewModel model)
+        {
+            if ((await roomService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
 
-        //    await destinationService.Delete(id);
+            await roomService.Delete(id);
 
-        //    return RedirectToAction(nameof(All));
-        //}
+            return RedirectToAction(nameof(All));
+        }
     }
 }
