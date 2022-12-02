@@ -12,6 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IDestinationService, DestinationService>();
             services.AddScoped<ITransportService, TransportService>();
             services.AddScoped<IHotelService, HotelService>();
+            services.AddScoped<IRoomService, RoomService>();
 
             return services;
         }
