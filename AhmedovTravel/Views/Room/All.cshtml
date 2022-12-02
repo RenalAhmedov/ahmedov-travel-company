@@ -12,8 +12,8 @@
              src="@Room.ImageUrl" alt="Room Image">
             <div class="card-body">
 
-                <h5 class="card-title mt-1">@Room.Persons</h5>
-                <p class="card-title mt-1">@Room.PricePerNight</p>
+                <h5 class="card-title mt-1">Persons: @Room.Persons</h5>
+                <p class="card-title mt-1">Price for a night: @Room.PricePerNight</p>
                 <p class="mb-0">RoomType: @Room.RoomType</p>
             </div>
             @if (User?.Identity?.IsAuthenticated ?? false)

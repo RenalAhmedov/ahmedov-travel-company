@@ -1,11 +1,12 @@
 ﻿using AhmedovTravel.Infrastructure.Data.Entities;
-using AhmedovTravel.Infrastructure.DataConstants;
 using System.ComponentModel.DataAnnotations;
 
 namespace AhmedovTravel.Core.Models.Room
 {
-    public class AddRoomViewModel
+    public class EditRoomViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         //[MaxLength(RoomConstants.RoomPersonsMaxLength), MinLength(RoomConstants.RoomPersonsMinLength)] //check
         public int Persons { get; set; }
