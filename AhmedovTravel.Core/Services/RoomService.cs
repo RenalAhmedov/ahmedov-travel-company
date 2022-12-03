@@ -40,11 +40,11 @@ namespace AhmedovTravel.Core.Services
             }
 
             var room = await repo.All<Room>()
-                 .FirstOrDefaultAsync(d => d.Id == roomId);
+                 .FirstOrDefaultAsync(d => d.Id == roomId); // check!!! is chosen
 
             if (room == null)
             {
-                throw new ArgumentException("Invalid Hotel ID");
+                throw new ArgumentException("Invalid Room ID");
             }
 
             if (!user.UserRooms.Any(d => d.Id == roomId))
@@ -90,9 +90,8 @@ namespace AhmedovTravel.Core.Services
         public async Task<IEnumerable<RoomViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Room>()
-              .Where(c => c.IsActive == true)
+              .Where(c => c.IsActive == true && c.IsChosen == false)
               .Include(rt => rt.RoomType) // check
-              /*              .Where(h => h.IsChosen == false)*/ //check
               .OrderBy(d => d.Id)
               .Select(d => new RoomViewModel()
               {
@@ -108,6 +107,28 @@ namespace AhmedovTravel.Core.Services
         public async Task<IEnumerable<RoomType>> GetRoomTypes()
         {
             return await repo.All<RoomType>().ToListAsync();
+        }
+
+        public async Task RemoveRoomFromCollectionAsync(int roomId, string userId)
+        {
+            var user = await repo.All<User>()
+               .Include(u => u.UserRooms)
+               .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            var room = user.UserRooms.FirstOrDefault(m => m.Id == roomId);
+
+            if (room != null)
+            {
+                room.IsChosen = true; // done it true and in hotel service aswell so it doesn't show in collection 
+                user.UserRooms.Remove(room);
+
+                await repo.SaveChangesAsync();
+            }
         }
 
         public async Task<RoomViewModel> RoomDetailsById(int id)
@@ -130,6 +151,7 @@ namespace AhmedovTravel.Core.Services
         {
             var user = await repo.All<User>()
                .Include(u => u.UserRooms)
+               //.ThenInclude(ur => ur.RoomType)
                .FirstOrDefaultAsync(u => u.Id == userId); //put where ischosen = false;
 
             if (user == null)

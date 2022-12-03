@@ -36,26 +36,26 @@ namespace AhmedovTravel.Controllers
                 throw;
             }
 
-            return RedirectToAction(nameof(ShowRoomCollectionAsync));
+            return RedirectToAction(nameof(ShowRoomCollection));
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowRoomCollectionAsync()
+        public async Task<IActionResult> ShowRoomCollection()
         {
             var userId = User.Id();
             var model = await roomService.ShowRoomCollectionAsync(userId);
 
-            return View("Mine", model); // do
+            return View("Mine", model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> RemoveFromCollection(int destinationId)
-        //{
-        //    var userId = User.Id();
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromCollection(int roomId)
+        {
+            var userId = User.Id();
 
-        //    await destinationService.RemoveDestinationFromCollectionAsync(destinationId, userId);
+            await roomService.RemoveRoomFromCollectionAsync(roomId, userId);
 
-        //    return RedirectToAction(nameof(ShowDestinationCollection));
-        //}
+            return RedirectToAction(nameof(ShowRoomCollection));
+        }
     }
 }
