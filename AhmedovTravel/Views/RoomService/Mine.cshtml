@@ -1,0 +1,27 @@
+﻿@using AhmedovTravel.Core.Models.RoomService
+@model IEnumerable<RoomServiceViewModel>
+
+@{
+    ViewBag.Title = "My Room Service";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var roomservice in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@roomservice.ImageUrl" alt="RoomService Image">
+            <div class="card-body">
+                <h5 class="card-title mt-1">@roomservice.PricePerPerson</h5>
+                <h5 class="card-title mt-1">@roomservice.Description</h5>
+            </div>
+
+            <form class="input-group-sm" asp-route-roomserviceId="@roomservice.Id" asp-controller="RoomService" asp-action="RemoveFromCollection" method="post">
+                <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Remove" />
+            </form>
+        </div>
+    }
+</div>

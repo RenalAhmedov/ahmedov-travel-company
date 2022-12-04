@@ -38,23 +38,23 @@ namespace AhmedovTravel.Controllers
             return RedirectToAction(nameof(All));
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> ShowTransportCollection()
-        //{
-        //    var userId = User.Id();
-        //    var model = await transportService.ShowTransportCollectionAsync(userId);
+        [HttpGet]
+        public async Task<IActionResult> ShowRoomServiceCollection()
+        {
+            var userId = User.Id();
+            var model = await roomService.ShowRoomServicetCollectionAsync(userId);
 
-        //    return View("Mine", model);
-        //}
+            return View("Mine", model);
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> RemoveFromCollection(int transportId)
-        //{
-        //    var userId = User.Id();
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromCollection(int roomServiceId)
+        {
+            var userId = User.Id();
 
-        //    await transportService.RemoveTransportFromCollectionAsync(transportId, userId);
+            await roomService.RemoveRoomServiceFromCollectionAsync(roomServiceId, userId);
 
-        //    return RedirectToAction(nameof(ShowTransportCollection));
-        //}
+            return RedirectToAction(nameof(ShowRoomServiceCollection));
+        }
     }
 }

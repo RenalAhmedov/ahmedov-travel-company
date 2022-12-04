@@ -1,5 +1,6 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Models.RoomService;
+using AhmedovTravel.Core.Models.Transport;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -58,6 +59,49 @@ namespace AhmedovTravel.Core.Services
                    ImageUrl = t.ImageUrl,
                })
                .ToListAsync();
+        }
+
+        public async Task RemoveRoomServiceFromCollectionAsync(int roomServiceId, string userId)
+        {
+            var user = await repo.All<User>()
+                .Include(u => u.UserRoomServices)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            var roomService = user.UserRoomServices.FirstOrDefault(m => m.Id == roomServiceId);
+
+            if (roomService != null)
+            {
+                roomService.IsActive = false;
+                user.UserRoomServices.Remove(roomService);
+
+                await repo.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<RoomServiceViewModel>> ShowRoomServicetCollectionAsync(string userId)
+        {
+            var user = await repo.All<User>()
+                 .Include(u => u.UserRoomServices)
+                 .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            return user.UserRoomServices
+                .Select(d => new RoomServiceViewModel()
+                {
+                    Id = d.Id,
+                    PricePerPerson = d.PricePerPerson,
+                    Description = d.Description,
+                    ImageUrl = d.ImageUrl,
+                });
         }
     }
 }

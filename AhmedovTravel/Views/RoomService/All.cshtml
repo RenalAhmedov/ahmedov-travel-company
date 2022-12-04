@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "All RoomService Types";
 }
+
 <div class="text-center row">
     @foreach (var roomService in Model)
     {
@@ -14,7 +15,7 @@
                 <h5 class="card-title mt-1">@roomService.Description</h5>
                 <h5 class="card-title mt-1">@roomService.PricePerPerson</h5>
             </div>
-            <form class="input-group-sm" asp-route-roomserviceId="@roomService.Id" asp-controller="RoomServiceController" asp-action="AddToCollection" method="post">
+            <form class="input-group-sm" asp-route-roomserviceId="@roomService.Id" asp-controller="RoomService" asp-action="AddToCollection" method="post">
                 <input type="submit" value="Pick" class="fs-6 btn btn-success mb-3 p-2" />
             </form>
         </div>
