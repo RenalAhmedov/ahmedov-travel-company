@@ -4,7 +4,7 @@ namespace AhmedovTravel.Core.Contracts
 {
     public interface IRoomServiceService
     {
-        //Task<IEnumerable<TransportViewModel>> GetAllAsync();
+        Task<IEnumerable<RoomServiceViewModel>> GetAllAsync();
         //Task AddTransportToCollectionAsync(int transportId, string userId);
         //Task<IEnumerable<TransportViewModel>> ShowTransportCollectionAsync(string userId);
         //Task<TransportViewModel> TransportDetailsById(int id);
