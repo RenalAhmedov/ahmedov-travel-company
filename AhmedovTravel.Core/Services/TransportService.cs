@@ -102,19 +102,19 @@ namespace AhmedovTravel.Core.Services
                 });
         }
 
-        public async Task<TransportViewModel> TransportDetailsById(int id)
-        {
-            return await repo.AllReadonly<Transport>()
-               .Where(h => h.IsActive)
-               .Where(h => h.Id == id)
-               .Select(h => new TransportViewModel()
-               {
-                   Id = h.Id,
-                   TransportType = h.TransportType,
-                   ImageUrl = h.ImageUrl,
+        //public async Task<TransportViewModel> TransportDetailsById(int id)
+        //{
+        //    return await repo.AllReadonly<Transport>()
+        //       .Where(h => h.IsActive)
+        //       .Where(h => h.Id == id)
+        //       .Select(h => new TransportViewModel()
+        //       {
+        //           Id = h.Id,
+        //           TransportType = h.TransportType,
+        //           ImageUrl = h.ImageUrl,
 
-               })
-               .FirstAsync();
-        }
+        //       })
+        //       .FirstAsync();
+        //}
     }
 }
