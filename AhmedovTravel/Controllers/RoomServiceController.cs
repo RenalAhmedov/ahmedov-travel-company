@@ -1,5 +1,6 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AhmedovTravel.Controllers
@@ -13,28 +14,29 @@ namespace AhmedovTravel.Controllers
             roomService = _roomService;
         }
 
-        //public async Task<IActionResult> All()
-        //{
-        //    var model = await transportService.GetAllAsync();
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
+        {
+            var model = await roomService.GetAllAsync();
 
-        //    return View("All", model);
-        //}
+            return View("All", model);
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddToCollection(int transportId)
-        //{
-        //    try
-        //    {
-        //        var userId = User.Id();
-        //        await transportService.AddTransportToCollectionAsync(transportId, userId);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> AddToCollection(int roomServiceId)
+        {
+            try
+            {
+                var userId = User.Id();
+                await roomService.AddRoomServiceToCollectionAsync(roomServiceId, userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    return RedirectToAction(nameof(All));
-        //}
+            return RedirectToAction(nameof(All));
+        }
 
         //[HttpGet]
         //public async Task<IActionResult> ShowTransportCollection()

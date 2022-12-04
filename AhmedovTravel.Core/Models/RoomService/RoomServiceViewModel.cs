@@ -1,6 +1,10 @@
 ﻿namespace AhmedovTravel.Core.Models.RoomService
 {
-    internal class RoomServiceViewModel
+    public class RoomServiceViewModel
     {
+        public int Id { get; set; }
+        public decimal PricePerPerson { get; set; }
+        public string Description { get; set; } 
+        public string ImageUrl { get; set; }
     }
 }

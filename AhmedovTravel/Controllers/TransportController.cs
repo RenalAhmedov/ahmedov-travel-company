@@ -1,5 +1,6 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AhmedovTravel.Controllers
@@ -14,6 +15,7 @@ namespace AhmedovTravel.Controllers
             transportService = _transportService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             var model = await transportService.GetAllAsync();
