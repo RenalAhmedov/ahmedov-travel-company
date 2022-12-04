@@ -1,4 +1,4 @@
-﻿namespace AhmedovTravel.Core.Models.RoomServiceViewModel
+﻿namespace AhmedovTravel.Core.Models.RoomService
 {
     internal class RoomServiceViewModel
     {
