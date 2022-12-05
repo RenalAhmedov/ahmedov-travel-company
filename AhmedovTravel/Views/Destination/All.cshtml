@@ -13,7 +13,7 @@
 
                 <h5 class="card-title mt-1">@destination.Title</h5>
                 <p class="card-title mt-1">@destination.Town</p>
-                <p class="mb-0">Price: @destination.Price</p>
+                <p class="mb-0">Price: @destination.Price.ToString("n") BGN</p>
                 <p class="mb-0">Rating: @destination.Rating</p>
             </div>
             @if (User?.Identity?.IsAuthenticated ?? false)

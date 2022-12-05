@@ -92,7 +92,7 @@ namespace AhmedovTravel.Core.Services
                 .Select(h => new AllDestinationsViewModel()
                 {
                     Id = id,
-                    ImageUrl = h.ImageUrl,        
+                    ImageUrl = h.ImageUrl,
                     Title = h.Title,
                     Town = h.Town,
                     Price = h.Price,
