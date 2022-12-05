@@ -40,6 +40,7 @@ namespace AhmedovTravel.Core.Services
             }
 
             var room = await repo.All<Room>()
+                .Include(rt => rt.RoomType)
                  .FirstOrDefaultAsync(d => d.Id == roomId); // check!!! is chosen
 
             if (room == null)
@@ -54,7 +55,7 @@ namespace AhmedovTravel.Core.Services
                     Persons = room.Persons,
                     PricePerNight = room.PricePerNight,
                     ImageUrl = room.ImageUrl,
-                    RoomType = room.RoomType,
+                    RoomType = room.RoomType, // check
                     IsChosen = true //check
                 });
             }
@@ -151,7 +152,7 @@ namespace AhmedovTravel.Core.Services
         {
             var user = await repo.All<User>()
                .Include(u => u.UserRooms)
-               //.ThenInclude(ur => ur.RoomType)
+               .ThenInclude(u => u.RoomType) // check
                .FirstOrDefaultAsync(u => u.Id == userId); //put where ischosen = false;
 
             if (user == null)
