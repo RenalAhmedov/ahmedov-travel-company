@@ -90,7 +90,7 @@
             </div>
         </div>
     </nav>
-    <main>@RenderBody()</main>
+
 
     <!-- Masthead-->
     @if (this.User.IsInRole("Administrator"))
@@ -111,6 +111,11 @@
         </header>
     }
 
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
     <!-- Footer-->
     <footer class="footer py-4">
@@ -121,6 +126,7 @@
         </div>
     </footer>
 </body>
+
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
