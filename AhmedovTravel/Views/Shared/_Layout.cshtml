@@ -90,13 +90,13 @@
             </div>
         </div>
     </nav>
+    <main>@RenderBody()</main>
 
     <!-- Masthead-->
     @if (this.User.IsInRole("Administrator"))
     {
         <header class="masthead">
             <div class="container">
-                <main>@RenderBody()</main>
                 <div class="masthead-subheading">Hello Admin!</div>
                 <div class="masthead-heading text-uppercase">Now you can manage the travel system.</div>
             </div>
@@ -106,9 +106,7 @@
     {
         <header class="masthead">
             <div class="container">
-                <main>@RenderBody()</main>
                 <div class="masthead-subheading">Welcome To Ahmedov Travel</div>
-                <div class="masthead-heading text-uppercase">Pack up the essentials and let's go!</div>
             </div>
         </header>
     }
