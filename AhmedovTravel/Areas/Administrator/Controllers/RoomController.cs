@@ -1,11 +1,7 @@
 ﻿using AhmedovTravel.Core.Contracts;
-using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Core.Models.Room;
-using AhmedovTravel.Core.Services;
-using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace AhmedovTravel.Areas.Administrator.Controllers
 {
