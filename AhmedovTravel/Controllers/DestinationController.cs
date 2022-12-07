@@ -1,5 +1,4 @@
 ﻿using AhmedovTravel.Core.Contracts;
-using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
