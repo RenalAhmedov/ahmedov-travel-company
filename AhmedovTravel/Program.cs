@@ -2,6 +2,7 @@ using AhmedovTravel.Infrastructure.Data.Entities;
 using AhmedovTravel.Infrastrucutre.Data;
 using AhmedovTravel.ModelBinders;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,7 @@ builder.Services.AddControllersWithViews()
 .AddMvcOptions(options =>
  {
      options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
  });
 
 builder.Services.AddApplicationServices();
