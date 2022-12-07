@@ -36,7 +36,7 @@ namespace AhmedovTravel.Controllers
                 throw;
             }
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(ShowTransportCollection));
         }
 
         [HttpGet]
