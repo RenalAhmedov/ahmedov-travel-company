@@ -19,97 +19,79 @@
 
 <!-- Navigation-->
 <body id="page-top">
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    @if (this.User.IsInRole("Administrator"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Destination" asp-action="All">All Destinations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="All">All Hotels</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Room" asp-action="All">All Rooms</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="All">All Destinations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="All">All Hotels</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="All">All Rooms</a>
-                        </li>
-                    }
-                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
-                    {
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
                         @if (this.User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Destination" asp-action="Add">Add Destinations</a>
+                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Destination" asp-action="All">All Destinations</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="Add">Add Hotel</a>
+                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="All">All Hotels</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Room" asp-action="Add">Add Room</a>
+                                <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Room" asp-action="All">All Rooms</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Transport" asp-action="ShowTransportCollection">My Transport</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="All">All Destinations</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="ShowDestinationCollection">My Destination</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="All">All Hotels</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="ShowHotelCollection">My Hotel</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="ShowRoomCollection">My Room</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RoomService" asp-action="ShowRoomServiceCollection">My Room Service</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="All">All Rooms</a>
                             </li>
                         }
-                    }
-                </ul>
-                <partial name="_LoginPartial" />
+                        @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                        {
+                            @if (this.User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Destination" asp-action="Add">Add Destinations</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Hotel" asp-action="Add">Add Hotel</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Room" asp-action="Add">Add Room</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Transport" asp-action="ShowTransportCollection">My Transport</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="ShowDestinationCollection">My Destination</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="ShowHotelCollection">My Hotel</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="ShowRoomCollection">My Room</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="RoomService" asp-action="ShowRoomServiceCollection">My Room Service</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
             </div>
-        </div>
-    </nav>
-
-
-    <!-- Masthead-->
-    @if (this.User.IsInRole("Administrator"))
-    {
-        <header class="masthead">
-            <div class="container">
-                <div class="masthead-subheading">Hello Admin!</div>
-                <div class="masthead-heading text-uppercase">Now you can manage the travel system.</div>
-            </div>
-        </header>
-    }
-    else
-    {
-        <header class="masthead">
-            <div class="container">
-                <div class="masthead-subheading">Welcome To Ahmedov Travel</div>
-            </div>
-        </header>
-    }
+        </nav>
+    </header>
 
     <div class="container">
         <main role="main" class="pb-3">

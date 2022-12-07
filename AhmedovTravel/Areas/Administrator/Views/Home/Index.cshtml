@@ -1,4 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Admin Home Page";
 }
+
+@if (this.User.IsInRole("Administrator"))
+{
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Hello Admin!</div>
+            <div class="masthead-heading text-uppercase">Now you can manage the travel system.</div>
+        </div>
+    </header>
+}
+else
+{
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Welcome To Ahmedov Travel</div>
+        </div>
+    </header>
+}
+
 
