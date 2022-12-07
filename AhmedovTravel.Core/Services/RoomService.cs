@@ -41,7 +41,7 @@ namespace AhmedovTravel.Core.Services
 
             var room = await repo.All<Room>()
                 .Include(rt => rt.RoomType)
-                 .FirstOrDefaultAsync(d => d.Id == roomId); // check!!! is chosen
+                 .FirstOrDefaultAsync(d => d.Id == roomId);
 
             if (room == null)
             {
@@ -55,8 +55,8 @@ namespace AhmedovTravel.Core.Services
                     Persons = room.Persons,
                     PricePerNight = room.PricePerNight,
                     ImageUrl = room.ImageUrl,
-                    RoomType = room.RoomType, // check
-                    IsChosen = true //check
+                    RoomType = room.RoomType,
+                    IsChosen = true 
                 });
             }
             await repo.SaveChangesAsync();
@@ -77,7 +77,7 @@ namespace AhmedovTravel.Core.Services
             room.Persons = model.Persons;
             room.ImageUrl = model.ImageUrl;
             room.PricePerNight = model.PricePerNight;
-            room.RoomTypeId = model.RoomTypeId; //check!
+            room.RoomTypeId = model.RoomTypeId; 
 
             await repo.SaveChangesAsync();
         }
@@ -92,7 +92,7 @@ namespace AhmedovTravel.Core.Services
         {
             return await repo.AllReadonly<Room>()
               .Where(c => c.IsActive == true && c.IsChosen == false)
-              .Include(rt => rt.RoomType) // check
+              .Include(rt => rt.RoomType) 
               .OrderBy(d => d.Id)
               .Select(d => new RoomViewModel()
               {
@@ -125,7 +125,7 @@ namespace AhmedovTravel.Core.Services
 
             if (room != null)
             {
-                room.IsChosen = true; // done it true and in hotel service aswell so it doesn't show in collection 
+                room.IsChosen = true; 
                 user.UserRooms.Remove(room);
 
                 await repo.SaveChangesAsync();
@@ -143,7 +143,7 @@ namespace AhmedovTravel.Core.Services
                    Persons = h.Persons,
                    ImageUrl = h.ImageUrl,
                    PricePerNight = h.PricePerNight,
-                   RoomType = h.RoomType != null ? h.RoomType.Name : null //check
+                   RoomType = h.RoomType != null ? h.RoomType.Name : null 
                })
                .FirstAsync();
         }
@@ -152,8 +152,8 @@ namespace AhmedovTravel.Core.Services
         {
             var user = await repo.All<User>()
                .Include(u => u.UserRooms)
-               .ThenInclude(u => u.RoomType) // check
-               .FirstOrDefaultAsync(u => u.Id == userId); //put where ischosen = false;
+               .ThenInclude(u => u.RoomType) 
+               .FirstOrDefaultAsync(u => u.Id == userId); 
 
             if (user == null)
             {
@@ -167,7 +167,7 @@ namespace AhmedovTravel.Core.Services
                     Persons = d.Persons,
                     PricePerNight = d.PricePerNight,
                     ImageUrl = d.ImageUrl,
-                    RoomType = d.RoomType != null ? d.RoomType.Name : null // CHECK
+                    RoomType = d.RoomType != null ? d.RoomType.Name : null 
                 });
         }
     }

@@ -20,7 +20,6 @@ namespace AhmedovTravel.Infrastructure.Data.Configuration
                 .HasForeignKey(di => di.DestinationId)
                 .OnDelete(DeleteBehavior.Restrict); 
 
-            //IsActive default value for all entities
             builder.Property(c => c.IsActive)
                 .HasDefaultValue(true);
         }

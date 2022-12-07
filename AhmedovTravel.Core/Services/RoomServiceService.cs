@@ -48,7 +48,7 @@ namespace AhmedovTravel.Core.Services
         public async Task<IEnumerable<RoomServiceViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Infrastructure.Data.Entities.RoomService>()
-               .Where(c => c.IsActive && c.Id == 1 || c.Id == 2) // check the where
+               .Where(c => c.IsActive && c.Id == 1 || c.Id == 2) 
                .OrderBy(t => t.Id)
                .Select(t => new RoomServiceViewModel()
                {

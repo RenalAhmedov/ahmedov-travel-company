@@ -1,7 +1,6 @@
 ﻿using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel;
 
 namespace AhmedovTravel.Infrastructure.Data.Configuration
 {

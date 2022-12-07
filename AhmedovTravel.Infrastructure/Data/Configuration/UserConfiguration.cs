@@ -18,7 +18,6 @@ namespace AhmedovTravel.Infrastructure.Data.Configuration
             builder.Property(u => u.Email)
                 .HasMaxLength(UserConstants.EmailMaxLength);
 
-            //builder.HasData(CreateUsers());
         }
 
         

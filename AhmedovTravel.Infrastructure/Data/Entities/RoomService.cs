@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using AhmedovTravel.Infrastructure.DataConstants;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using AhmedovTravel.Infrastructure.DataConstants;
 
 namespace AhmedovTravel.Infrastructure.Data.Entities
 {

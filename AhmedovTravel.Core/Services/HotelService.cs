@@ -54,7 +54,7 @@ namespace AhmedovTravel.Core.Services
                     Description = hotel.Description,
                     HotelRating = hotel.HotelRating,
                     ImageUrl = hotel.ImageUrl,
-                    IsChosen = true //check
+                    IsChosen = true 
                 });
             }
             await repo.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace AhmedovTravel.Core.Services
         {
             return await repo.AllReadonly<Hotel>()
               .Where(c => c.IsActive == true)
-              .Where(h => h.IsChosen == false) // check
+              .Where(h => h.IsChosen == false) 
               .OrderBy(d => d.Id)
               .Select(d => new HotelViewModel()
               {
@@ -145,7 +145,7 @@ namespace AhmedovTravel.Core.Services
         {
             var user = await repo.All<User>()
                 .Include(u => u.UserHotels)
-                .FirstOrDefaultAsync(u => u.Id == userId); //put where ischosen = false;
+                .FirstOrDefaultAsync(u => u.Id == userId); 
 
             if (user == null)
             {

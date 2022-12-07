@@ -101,20 +101,5 @@ namespace AhmedovTravel.Core.Services
                     ImageUrl = d.ImageUrl,
                 });
         }
-
-        //public async Task<TransportViewModel> TransportDetailsById(int id)
-        //{
-        //    return await repo.AllReadonly<Transport>()
-        //       .Where(h => h.IsActive)
-        //       .Where(h => h.Id == id)
-        //       .Select(h => new TransportViewModel()
-        //       {
-        //           Id = h.Id,
-        //           TransportType = h.TransportType,
-        //           ImageUrl = h.ImageUrl,
-
-        //       })
-        //       .FirstAsync();
-        //}
     }
 }
