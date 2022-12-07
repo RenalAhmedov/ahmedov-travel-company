@@ -1,6 +1,5 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Models.RoomService;
-using AhmedovTravel.Core.Models.Transport;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
 using Microsoft.EntityFrameworkCore;

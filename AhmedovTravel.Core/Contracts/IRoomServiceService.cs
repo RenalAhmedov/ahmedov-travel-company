@@ -1,5 +1,4 @@
 ﻿using AhmedovTravel.Core.Models.RoomService;
-using AhmedovTravel.Core.Models.Transport;
 
 namespace AhmedovTravel.Core.Contracts
 {
