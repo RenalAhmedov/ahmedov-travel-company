@@ -32,7 +32,7 @@ namespace AhmedovTravel.Core.Services
         public async Task AddDestinationToCollectionAsync(int destinationId, string userId)
         {
             var user = await repo.All<User>()
-                .Include(u => u.UsersDestinations) // added this 08.12.2022 14;40
+                .Include(u => u.UsersDestinations) 
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
@@ -42,7 +42,7 @@ namespace AhmedovTravel.Core.Services
 
             if (user.UsersDestinations.Count == 1)
             {
-                throw new ArgumentException("you can add only one destination to the watchlist."); // added this 08.12.2022 14;40
+                throw new ArgumentException("you can add only one destination to the watchlist.");
             }
 
             var destination = await repo.All<Destination>()
