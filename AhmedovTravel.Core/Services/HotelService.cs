@@ -31,11 +31,17 @@ namespace AhmedovTravel.Core.Services
         public async Task AddHotelToCollectionAsync(int hotelId, string userId)
         {
             var user = await repo.All<User>()
+                .Include(u => u.UserHotels)
                  .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
             {
                 throw new ArgumentException("Invalid user ID");
+            }
+
+            if (user.UserHotels.Count == 1)
+            {
+                throw new ArgumentException("you can add only one hotel to the watchlist.");
             }
 
             var hotel = await repo.All<Hotel>()

@@ -18,11 +18,17 @@ namespace AhmedovTravel.Core.Services
         public async Task AddRoomServiceToCollectionAsync(int roomServiceId, string userId)
         {
             var user = await repo.All<User>()
+                .Include(u => u.UserRoomServices)
                  .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
             {
                 throw new ArgumentException("Invalid user ID");
+            }
+
+            if (user.UserRoomServices.Count == 1)
+            {
+                throw new ArgumentException("you can add only one roomservice to the watchlist.");
             }
 
             var roomService = await repo.All<Infrastructure.Data.Entities.RoomService>()

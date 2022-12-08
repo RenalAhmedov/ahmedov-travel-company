@@ -32,11 +32,17 @@ namespace AhmedovTravel.Core.Services
         public async Task AddDestinationToCollectionAsync(int destinationId, string userId)
         {
             var user = await repo.All<User>()
+                .Include(u => u.UsersDestinations) // added this 08.12.2022 14;40
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
             {
                 throw new ArgumentException("Invalid user ID");
+            }
+
+            if (user.UsersDestinations.Count == 1)
+            {
+                throw new ArgumentException("you can add only one destination to the watchlist."); // added this 08.12.2022 14;40
             }
 
             var destination = await repo.All<Destination>()

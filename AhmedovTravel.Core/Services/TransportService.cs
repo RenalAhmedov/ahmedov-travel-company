@@ -18,11 +18,17 @@ namespace AhmedovTravel.Core.Services
         public async Task AddTransportToCollectionAsync(int transportId, string userId)
         {
             var user = await repo.All<User>()
+                .Include(u => u.UserTransport)
                  .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
             {
                 throw new ArgumentException("Invalid user ID");
+            }
+
+            if (user.UserTransport.Count == 1)
+            {
+                throw new ArgumentException("you can add only one transport to the watchlist.");
             }
 
             var transport = await repo.All<Transport>()
