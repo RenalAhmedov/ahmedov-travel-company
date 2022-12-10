@@ -33,7 +33,7 @@ namespace AhmedovTravel.Controllers
             }
             catch (Exception)
             {
-                throw;
+                throw; // PUT TOASTER FOR MESSAGE 
             }
 
             return RedirectToAction(nameof(ShowDestinationCollection));
