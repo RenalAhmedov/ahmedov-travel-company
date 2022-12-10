@@ -5,9 +5,11 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhmedovTravel", "AhmedovTravel\AhmedovTravel.csproj", "{1445BF3E-CD45-4E1B-8831-272C101A9C33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhmedovTravel.Infrastructure", "AhmedovTravel.Infrastructure\AhmedovTravel.Infrastructure.csproj", "{4C17BE5B-CE32-4F49-AB85-28C90E32FD2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhmedovTravel.Infrastructure", "AhmedovTravel.Infrastructure\AhmedovTravel.Infrastructure.csproj", "{4C17BE5B-CE32-4F49-AB85-28C90E32FD2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhmedovTravel.Core", "AhmedovTravel.Core\AhmedovTravel.Core.csproj", "{8CC95A7C-C2A8-4E1D-A68D-63B1EAF479A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhmedovTravel.Core", "AhmedovTravel.Core\AhmedovTravel.Core.csproj", "{8CC95A7C-C2A8-4E1D-A68D-63B1EAF479A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhmedovTravel.Tests", "AhmedovTravel.Tests\AhmedovTravel.Tests.csproj", "{9CA809D3-402E-43B6-9DC6-361BC6C2A224}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{8CC95A7C-C2A8-4E1D-A68D-63B1EAF479A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC95A7C-C2A8-4E1D-A68D-63B1EAF479A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC95A7C-C2A8-4E1D-A68D-63B1EAF479A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CA809D3-402E-43B6-9DC6-361BC6C2A224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CA809D3-402E-43B6-9DC6-361BC6C2A224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CA809D3-402E-43B6-9DC6-361BC6C2A224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CA809D3-402E-43B6-9DC6-361BC6C2A224}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
