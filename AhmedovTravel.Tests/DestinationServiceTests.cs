@@ -8,6 +8,16 @@ namespace AhmedovTravel.Tests
 {
     public class DestinationServiceTests
     {
+        [SetUp]
+        public void Setup()
+        {
 
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+
+        }
     }
 }
