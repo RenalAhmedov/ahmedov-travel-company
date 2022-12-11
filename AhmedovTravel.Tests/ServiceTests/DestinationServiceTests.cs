@@ -5,10 +5,7 @@ using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
 using AhmedovTravel.Infrastrucutre.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Moq;
 using NUnit.Framework.Internal;
-using System;
 
 namespace AhmedovTravel.Tests.ServiceTests
 {
@@ -176,9 +173,20 @@ namespace AhmedovTravel.Tests.ServiceTests
         {
             var expected = data.Destinations.Where(d => d.IsActive).Count();
 
+            await repo.AddAsync(new Destination() // try using only the repo methods for the collection tests! TODO
+            {
+                Title = "Laplandiq",
+                Town = "Ahtopol",
+                ImageUrl = "sadasdasdasdasd1231",
+                Rating = 4,
+                Price = 444,
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
             var actual = destinationService.GetAllAsync().Result.Count();
 
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual > expected);
         }
 
         //[Test]
