@@ -19,7 +19,7 @@ namespace AhmedovTravel.Tests.ServiceTests
         public void Setup()
         {
             var contextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase("DestinationDB")
+            .UseInMemoryDatabase("HotelDb")
             .Options;
 
             data = new ApplicationDbContext(contextOptions);
