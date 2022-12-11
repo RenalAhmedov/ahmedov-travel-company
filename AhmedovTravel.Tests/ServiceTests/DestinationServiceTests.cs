@@ -53,6 +53,49 @@ namespace AhmedovTravel.Tests.ServiceTests
             Assert.That(afterAdding, Is.EqualTo(oldCount + 1));
         }
 
+        //[Test]
+        //public async Task TestAddToCollection_Destination()
+        //{
+        //    await destinationService.AddDestinationAsync(new AddDestinationViewModel()
+        //    {
+        //        Title = "Laplandiq",
+        //        Town = "Ahtopol",
+        //        ImageUrl = "gsdfgfgsdfgds",
+        //        Rating = 7,
+        //        Price = 666
+        //    });
+
+        //    var actualDestinationId = await data.Destinations.FirstAsync();
+        //    var actualUserId = await data.UsersDestinations.FirstAsync(); // doesn't have users needs to register one
+
+        //    await destinationService.AddDestinationToCollectionAsync(actualDestinationId.Id, actualUserId.UserId);
+
+        //    var afterAdding = await repo.AllReadonly<UserDestination>().CountAsync();
+
+        //    Assert.That(afterAdding, Is.EqualTo(1));
+        //}
+
+        //[Test]
+        //public async Task TestDestinationDetailsById_Destination()
+        //{
+        //    await destinationService.AddDestinationAsync(new AddDestinationViewModel()
+        //    {
+        //        ImageUrl = "asdasd12sdas",
+        //        Title = "Testss",
+        //        Town = "Sofiq",
+        //        Price = 555,
+        //        Rating = 5
+        //    });
+
+        //    var expected = await data.Destinations.FirstAsync();
+        //    expected.IsActive = true;
+
+        //    var actual = await destinationService.DestinationDetailsById(expected.Id);
+
+        //    Assert.That(actual.Id, Is.EqualTo(expected.Id));
+        //    Assert.That(actual.Title, Is.EqualTo(expected.Title));
+        //}
+
         [Test]
         public async Task TestEdit_Destination()
         {
@@ -137,6 +180,26 @@ namespace AhmedovTravel.Tests.ServiceTests
 
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        //[Test]
+        //public async Task TestExists_Destination()
+        //{
+        //    await destinationService.AddDestinationAsync(new AddDestinationViewModel()
+        //    {
+        //        ImageUrl = "asdasd12sdas",
+        //        Title = "Testss",
+        //        Town = "Sofiq",
+        //        Price = 555,
+        //        Rating = 5
+        //    });
+
+        //    var actual = await data.Destinations.FirstAsync();
+        //    actual.IsActive = true;
+
+        //    var expected = await destinationService.Exists(actual.Id); // gives false?
+
+        //    Assert.IsTrue(expected);
+        //}
 
 
         [TearDown]
