@@ -75,14 +75,17 @@ namespace AhmedovTravel.Tests.ServiceTests
         //[Test]
         //public async Task TestDestinationDetailsById_Destination()
         //{
-        //    await destinationService.AddDestinationAsync(new AddDestinationViewModel()
+        //    await repo.AddAsync(new Destination()
         //    {
+        //        Id = 1,
         //        ImageUrl = "asdasd12sdas",
         //        Title = "Testss",
         //        Town = "Sofiq",
         //        Price = 555,
         //        Rating = 5
         //    });
+
+        //    await repo.SaveChangesAsync();
 
         //    var expected = await data.Destinations.FirstAsync();
         //    expected.IsActive = true;
@@ -200,6 +203,7 @@ namespace AhmedovTravel.Tests.ServiceTests
         //        Price = 555,
         //        Rating = 5
         //    });
+        //    await repo.SaveChangesAsync();
 
         //    var actual = await data.Destinations.FirstAsync();
         //    actual.IsActive = true;
