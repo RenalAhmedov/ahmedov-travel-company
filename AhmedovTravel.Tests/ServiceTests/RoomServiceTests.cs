@@ -1,16 +1,9 @@
 ﻿using AhmedovTravel.Core.Contracts;
-using AhmedovTravel.Core.Models.Hotel;
 using AhmedovTravel.Core.Models.Room;
-using AhmedovTravel.Core.Services;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
 using AhmedovTravel.Infrastrucutre.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RoomService = AhmedovTravel.Core.Services.RoomService;
 
 namespace AhmedovTravel.Tests.ServiceTests
@@ -25,7 +18,7 @@ namespace AhmedovTravel.Tests.ServiceTests
         public void Setup()
         {
             var contextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase("HotelDb")
+            .UseInMemoryDatabase("RoomServiceDb")
             .Options;
 
             data = new ApplicationDbContext(contextOptions);

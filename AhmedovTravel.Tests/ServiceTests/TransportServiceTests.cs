@@ -3,11 +3,6 @@ using AhmedovTravel.Core.Services;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastrucutre.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AhmedovTravel.Tests.ServiceTests
 {
@@ -21,7 +16,7 @@ namespace AhmedovTravel.Tests.ServiceTests
         public void Setup()
         {
             var contextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase("RoomService")
+            .UseInMemoryDatabase("TransportDb")
             .Options;
 
             data = new ApplicationDbContext(contextOptions);

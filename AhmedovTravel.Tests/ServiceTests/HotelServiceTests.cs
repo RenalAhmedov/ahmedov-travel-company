@@ -1,5 +1,4 @@
 ﻿using AhmedovTravel.Core.Contracts;
-using AhmedovTravel.Core.Models.Destination;
 using AhmedovTravel.Core.Models.Hotel;
 using AhmedovTravel.Core.Services;
 using AhmedovTravel.Infrastructure.Data.Common;
