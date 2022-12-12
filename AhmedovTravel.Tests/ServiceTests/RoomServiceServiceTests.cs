@@ -28,17 +28,24 @@ namespace AhmedovTravel.Tests.ServiceTests
             data.Database.EnsureCreated();
         }
 
-        //[Test]
-        //public async Task TestGetAll_RoomService()
-        //{
-        //    var expected = data.RoomServices.Where(d => d.IsActive).Count();
+        [Test]
+        public async Task TestGetAll_RoomService()
+        {
+            var expected = data.RoomServices.Where(d => d.IsActive).Count();
 
-        //    await repo.SaveChangesAsync();
+            await repo.AddAsync(new AhmedovTravel.Infrastructure.Data.Entities.RoomService() // try using only the repo methods for the collection tests! TODO
+            {
+                PricePerPerson = 40,
+                Description = "Sweet and salty",
+                ImageUrl = "BurgerPhoto",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
 
-        //    var actual = roomServiceService.GetAllAsync().Result.Count();
+            var actual = roomServiceService.GetAllAsync().Result.Count();
 
-        //    Assert.That(actual == expected);
-        //}
+            Assert.That(actual > expected);
+        }
 
         [TearDown]
         public void TearDown()
