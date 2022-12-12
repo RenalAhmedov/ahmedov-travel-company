@@ -49,6 +49,67 @@ namespace AhmedovTravel.Tests.ServiceTests
         }
 
         [Test]
+        public async Task TestAddToCollection_Hotel()
+        {
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            await repo.AddAsync(new Hotel()
+            {
+                Name = "renalHotel",
+                ImageUrl = "asdad12",
+                Description = "HotelTest",
+                HotelRating = 5,
+                IsActive = true,
+                IsChosen = false
+            });
+            await repo.SaveChangesAsync();
+
+            var actualHotelId = await data.Hotels.FirstAsync();
+            var actualUserId = await data.Users.FirstAsync();
+
+            await hotelService.AddHotelToCollectionAsync(actualHotelId.Id, actualUserId.Id);
+
+            var afterAdding = await repo.AllReadonly<User>().Include(uh => uh.UserHotels).FirstAsync();
+
+            Assert.That(afterAdding.UserHotels.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void TestAddToCollectionThrowsNullExceptionWhenUserIdIsNull_Hotel()
+        {
+            Assert.ThrowsAsync<NullReferenceException>(()
+                 => hotelService.AddHotelToCollectionAsync(1, ""));
+        }
+
+        [Test]
+        public async Task TestDetailsById_Hotel()
+        {
+            await repo.AddAsync(new Hotel()
+            {
+                Name = "renalHotel",
+                ImageUrl = "asdad12",
+                Description = "HotelTest",
+                HotelRating = 5,
+                IsActive = true,
+                IsChosen = false
+            });
+            await repo.SaveChangesAsync();
+
+            var expected = await data.Hotels.FirstAsync();
+
+            var actual = await hotelService.HotelDetailsById(expected.Id);
+
+            Assert.That(actual.Id, Is.EqualTo(expected.Id));
+            Assert.That(actual.Name, Is.EqualTo(expected.Name));
+        }
+
+        [Test]
         public async Task TestEdit_Hotel()
         {
             await repo.AddAsync(new Hotel() // try using only the repo methods for the collection tests! TODO

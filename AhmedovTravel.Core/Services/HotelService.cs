@@ -36,7 +36,7 @@ namespace AhmedovTravel.Core.Services
 
             if (user == null)
             {
-                throw new ArgumentException("Invalid user ID");
+                throw new NullReferenceException("Invalid user ID");
             }
 
             if (user.UserHotels.Count == 1)
@@ -49,7 +49,7 @@ namespace AhmedovTravel.Core.Services
 
             if (hotel == null)
             {
-                throw new ArgumentException("Invalid Hotel ID");
+                throw new NullReferenceException("Invalid Hotel ID");
             }
 
             if (!user.UserHotels.Any(d => d.Id == hotelId))
