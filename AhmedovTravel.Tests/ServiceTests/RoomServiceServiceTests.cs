@@ -1,6 +1,7 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Services;
 using AhmedovTravel.Infrastructure.Data.Common;
+using AhmedovTravel.Infrastructure.Data.Entities;
 using AhmedovTravel.Infrastrucutre.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,41 @@ namespace AhmedovTravel.Tests.ServiceTests
 
             data.Database.EnsureDeleted();
             data.Database.EnsureCreated();
+        }
+        [Test]
+        public async Task TestAddToCollection_RoomService()
+        {
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            await repo.AddAsync(new AhmedovTravel.Infrastructure.Data.Entities.RoomService()
+            {
+                PricePerPerson = 40,
+                Description = "Sweet and salty",
+                ImageUrl = "BurgerPhoto",
+            });
+            await repo.SaveChangesAsync();
+
+            var actualRoomServiceId = await data.RoomServices.FirstAsync();
+            var actualUserId = await data.Users.FirstAsync();
+
+            await roomServiceService.AddRoomServiceToCollectionAsync(actualRoomServiceId.Id, actualUserId.Id);
+
+            var afterAdding = await repo.AllReadonly<User>().Include(uh => uh.UserRoomServices).FirstAsync();
+
+            Assert.That(afterAdding.UserRoomServices.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void TestAddToCollectionThrowsNullExceptionWhenUserIdIsNull_RoomService()
+        {
+            Assert.ThrowsAsync<NullReferenceException>(()
+                 => roomServiceService.AddRoomServiceToCollectionAsync(1, ""));
         }
 
         [Test]

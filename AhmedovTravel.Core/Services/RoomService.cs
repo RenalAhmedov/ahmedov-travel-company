@@ -37,7 +37,7 @@ namespace AhmedovTravel.Core.Services
 
             if (user == null)
             {
-                throw new ArgumentException("Invalid user ID");
+                throw new NullReferenceException("Invalid user ID");
             }
 
             if (user.UserRooms.Count == 1)
