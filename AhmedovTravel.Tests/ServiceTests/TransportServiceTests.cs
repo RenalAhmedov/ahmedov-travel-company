@@ -86,6 +86,46 @@ namespace AhmedovTravel.Tests.ServiceTests
             Assert.That(actual > expected);
         }
 
+        [Test]
+        public async Task TestRemoveFromCollection_Transport()
+        {
+            var startCount = await repo.AllReadonly<Transport>().Where(e => e.IsActive).CountAsync();
+
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            await repo.AddAsync(new Transport()
+            {
+                TransportType = "Bus",
+                ImageUrl = "BusImage123",
+                IsActive = true,
+                IsChosen = false
+            });
+            await repo.SaveChangesAsync();
+
+
+            var actualTransportId = await data.Transports.FirstAsync();
+            var actualUserId = await data.Users.FirstAsync();
+
+            await transportService.RemoveTransportFromCollectionAsync(actualTransportId.Id,actualUserId.Id);
+
+            var afterRemove = await repo.AllReadonly<User>().Include(uh => uh.UserTransport).FirstAsync();
+
+            Assert.That(startCount, Is.EqualTo(afterRemove.UserTransport.Count));
+        }
+
+        [Test]
+        public void TestRemoveFromCollectionThrowsNullExceptionWhenUserIdIsNull_Transport()
+        {
+            Assert.ThrowsAsync<NullReferenceException>(()
+                 => transportService.RemoveTransportFromCollectionAsync(1, ""));
+        }
+
 
 
         [TearDown]
