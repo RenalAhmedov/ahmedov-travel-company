@@ -65,6 +65,24 @@ namespace AhmedovTravel.Tests.ServiceTests
         }
 
         [Test]
+        public async Task TestAddToCollectionThrowsNullExceptionWhenRoomServiceIdIsNull_RoomService()
+        {
+            //add transportr
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            var actualUserId = await data.Users.FirstAsync();
+
+            Assert.ThrowsAsync<NullReferenceException>(()
+                 => roomServiceService.AddRoomServiceToCollectionAsync(77, actualUserId.Id));
+        }
+
+        [Test]
         public async Task TestRemoveFromCollection_RoomService()
         {
             var startCount = await repo.AllReadonly<AhmedovTravel.Infrastructure.Data.Entities.RoomService>().Where(e => e.IsActive).CountAsync();

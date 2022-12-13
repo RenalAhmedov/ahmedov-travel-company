@@ -36,7 +36,7 @@ namespace AhmedovTravel.Core.Services
 
             if (transport == null)
             {
-                throw new ArgumentException("Invalid Transport ID");
+                throw new NullReferenceException("Invalid Transport ID");
             }
 
             if (!user.UserTransport.Any(d => d.Id == transportId))

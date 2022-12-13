@@ -36,7 +36,7 @@ namespace AhmedovTravel.Core.Services
 
             if (roomService == null)
             {
-                throw new ArgumentException("Invalid RoomService ID");
+                throw new NullReferenceException("Invalid RoomService ID");
             }
 
             if (!user.UserRoomServices.Any(d => d.Id == roomServiceId))

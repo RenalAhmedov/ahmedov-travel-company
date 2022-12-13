@@ -89,6 +89,44 @@ namespace AhmedovTravel.Tests.ServiceTests
         }
 
         [Test]
+        public async Task TestAddToCollectionThrowsNullExceptionWhenRoomIdIsNull_Room()
+        {
+            //add transportr
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            var actualUserId = await data.Users.FirstAsync();
+
+            Assert.ThrowsAsync<NullReferenceException>(()
+                 => roomService.AddRoomToCollectionAsync(77, actualUserId.Id));
+        }
+
+        [Test]
+        public async Task TestExists_Room()
+        {
+            await repo.AddAsync(new Room()
+            {
+                Persons = 2,
+                ImageUrl = "asdasd123123",
+                PricePerNight = 50,
+                IsActive = true,
+                IsChosen = false
+            });
+            await repo.SaveChangesAsync();
+
+            var actual = await data.Rooms.FirstAsync();
+
+            var expected = await roomService.Exists(actual.Id);
+
+            Assert.IsTrue(expected);
+        }
+
+        [Test]
         public async Task TestEdit_Room()
         {
             await repo.AddAsync(new Room() // try using only the repo methods for the collection tests! TODO

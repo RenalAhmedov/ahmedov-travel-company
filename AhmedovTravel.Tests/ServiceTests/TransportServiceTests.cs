@@ -66,6 +66,23 @@ namespace AhmedovTravel.Tests.ServiceTests
             Assert.ThrowsAsync<NullReferenceException>(()
                  => transportService.AddTransportToCollectionAsync(1, ""));
         }
+        [Test]
+        public async Task TestAddToCollectionThrowsNullExceptionWhenTransportIdIsNull_Transport()
+        {
+            //add transportr
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            var actualUserId = await data.Users.FirstAsync();
+
+            Assert.ThrowsAsync<NullReferenceException>(()
+                 => transportService.AddTransportToCollectionAsync(77, actualUserId.Id));
+        }
 
         [Test]
         public async Task TestGetAll_Transport()

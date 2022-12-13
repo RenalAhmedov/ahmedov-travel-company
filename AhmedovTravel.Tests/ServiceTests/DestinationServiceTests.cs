@@ -90,6 +90,24 @@ namespace AhmedovTravel.Tests.ServiceTests
                  => destinationService.AddDestinationToCollectionAsync(1, "asd123"));
         }
 
+        [Test]
+        public async Task TestAddToCollectionThrowsNullExceptionWhenDestinationIdIsNull_Destination()
+        {
+            //add transportr
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            var actualUserId = await data.Users.FirstAsync();
+
+            Assert.ThrowsAsync<NullReferenceException>(()
+                 => destinationService.AddDestinationToCollectionAsync(77, actualUserId.Id));
+        }
+
         //[Test]
         //public async Task TestAddToCollectionThrowsArgumentException_Destination()
         //{
@@ -242,6 +260,45 @@ namespace AhmedovTravel.Tests.ServiceTests
             Assert.That(actual > expected);
         }
 
+        //[Test]
+        //public async Task TestShowCollection_Destination() //here
+        //{
+        //    await repo.AddAsync(new User()
+        //    {
+        //        UserName = "Testing",
+        //        Email = "testingDestination@mail.com",
+        //        IsActive = true
+        //    });
+        //    await repo.SaveChangesAsync();
+
+        //    await repo.AddAsync(new Destination()
+        //    {
+        //        Title = "Laplandiq",
+        //        Town = "Ahtopol",
+        //        ImageUrl = "gsdfgfgsdfgds",
+        //        Rating = 7,
+        //        Price = 666,
+        //        IsActive = true,
+        //        IsChosen = false
+        //    });
+        //    await repo.SaveChangesAsync();
+
+        //    var expected = await data.Destinations.FirstAsync();
+        //    var actualUserId = await data.Users.FirstAsync();
+
+        //    await destinationService.AddDestinationToCollectionAsync(expected.Id, actualUserId.Id);
+
+        //    var afterShow = await destinationService.ShowDestinationCollectionAsync(actualUserId.Id);
+
+        //    var actual = await repo.AllReadonly<User>().Include(uh => uh.UsersDestinations).ThenInclude(x => x.Destination).FirstAsync();
+
+
+        //    Assert.That(afterShow, Is.EqualTo(expected));
+        //    await repo.SaveChangesAsync();
+
+
+        //}
+
         [Test]
         public async Task TestExists_Destination()
         {
@@ -263,6 +320,7 @@ namespace AhmedovTravel.Tests.ServiceTests
 
             Assert.IsTrue(expected);
         }
+
 
 
         [TearDown]

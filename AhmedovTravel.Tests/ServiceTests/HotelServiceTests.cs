@@ -88,6 +88,45 @@ namespace AhmedovTravel.Tests.ServiceTests
         }
 
         [Test]
+        public async Task TestAddToCollectionThrowsNullExceptionWhenHotelIdIsNull_Hotel()
+        {
+            //add transportr
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            var actualUserId = await data.Users.FirstAsync();
+
+            Assert.ThrowsAsync<NullReferenceException>(()
+                 => hotelService.AddHotelToCollectionAsync(77, actualUserId.Id));
+        }
+
+        [Test]
+        public async Task TestExists_Hotel()
+        {
+            await repo.AddAsync(new Hotel()
+            {
+                Name = "renalHotel",
+                ImageUrl = "asdad12",
+                Description = "HotelTest",
+                HotelRating = 5,
+                IsActive = true,
+                IsChosen = false
+            });
+            await repo.SaveChangesAsync();
+
+            var actual = await data.Hotels.FirstAsync();
+
+            var expected = await hotelService.Exists(actual.Id);
+
+            Assert.IsTrue(expected);
+        }
+
+        [Test]
         public async Task TestDetailsById_Hotel()
         {
             await repo.AddAsync(new Hotel()
