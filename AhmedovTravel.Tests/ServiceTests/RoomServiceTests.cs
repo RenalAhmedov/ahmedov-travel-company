@@ -1,6 +1,5 @@
 ﻿using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Core.Models.Room;
-using AhmedovTravel.Core.Services;
 using AhmedovTravel.Infrastructure.Data.Common;
 using AhmedovTravel.Infrastructure.Data.Entities;
 using AhmedovTravel.Infrastrucutre.Data;
@@ -91,7 +90,6 @@ namespace AhmedovTravel.Tests.ServiceTests
         [Test]
         public async Task TestAddToCollectionThrowsNullExceptionWhenRoomIdIsNull_Room()
         {
-            //add transportr
             await repo.AddAsync(new User()
             {
                 UserName = "Testing",
@@ -129,7 +127,7 @@ namespace AhmedovTravel.Tests.ServiceTests
         [Test]
         public async Task TestEdit_Room()
         {
-            await repo.AddAsync(new Room() // try using only the repo methods for the collection tests! TODO
+            await repo.AddAsync(new Room()
             {
                 Persons = 1,
                 ImageUrl = "asd1sd12414asa",
@@ -199,7 +197,7 @@ namespace AhmedovTravel.Tests.ServiceTests
         {
             var expected = data.Rooms.Where(d => d.IsActive).Count();
 
-            await repo.AddAsync(new Room() // try using only the repo methods for the collection tests! TODO
+            await repo.AddAsync(new Room() 
             {
                 Persons = 1,
                 ImageUrl = "asd1sd12414asa",

@@ -67,7 +67,6 @@ namespace AhmedovTravel.Tests.ServiceTests
         [Test]
         public async Task TestAddToCollectionThrowsNullExceptionWhenRoomServiceIdIsNull_RoomService()
         {
-            //add transportr
             await repo.AddAsync(new User()
             {
                 UserName = "Testing",
@@ -126,7 +125,7 @@ namespace AhmedovTravel.Tests.ServiceTests
         {
             var expected = data.RoomServices.Where(d => d.IsActive).Count();
 
-            await repo.AddAsync(new AhmedovTravel.Infrastructure.Data.Entities.RoomService() // try using only the repo methods for the collection tests! TODO
+            await repo.AddAsync(new AhmedovTravel.Infrastructure.Data.Entities.RoomService() 
             {
                 PricePerPerson = 40,
                 Description = "Sweet and salty",

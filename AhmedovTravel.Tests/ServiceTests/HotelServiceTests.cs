@@ -90,7 +90,6 @@ namespace AhmedovTravel.Tests.ServiceTests
         [Test]
         public async Task TestAddToCollectionThrowsNullExceptionWhenHotelIdIsNull_Hotel()
         {
-            //add transportr
             await repo.AddAsync(new User()
             {
                 UserName = "Testing",
@@ -151,7 +150,7 @@ namespace AhmedovTravel.Tests.ServiceTests
         [Test]
         public async Task TestEdit_Hotel()
         {
-            await repo.AddAsync(new Hotel() // try using only the repo methods for the collection tests! TODO
+            await repo.AddAsync(new Hotel()
             {
                 Name = "RenalHotel",
                 Description = "RenalDescription",
@@ -221,7 +220,7 @@ namespace AhmedovTravel.Tests.ServiceTests
         {
             var expected = data.Hotels.Where(d => d.IsActive).Count();
 
-            await repo.AddAsync(new Hotel() // try using only the repo methods for the collection tests! TODO
+            await repo.AddAsync(new Hotel()
             {
                 Name = "RenalHotel",
                 Description = "RenalDescription",
