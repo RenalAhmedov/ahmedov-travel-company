@@ -143,6 +143,31 @@ namespace AhmedovTravel.Tests.ServiceTests
                  => transportService.RemoveTransportFromCollectionAsync(1, ""));
         }
 
+        [Test]
+        public async Task TestShowCollection_Transport()
+        {
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            var actualUserId = await data.Users.FirstAsync();
+            var actualRoomService = await data.Transports.FirstAsync();
+
+            await transportService.AddTransportToCollectionAsync(actualRoomService.Id, actualUserId.Id);
+            await repo.SaveChangesAsync();
+
+            var actualTransport = await transportService.ShowTransportCollectionAsync(actualUserId.Id);
+            await repo.SaveChangesAsync();
+            var transport = actualTransport.FirstOrDefault();
+
+            Assert.That(transport.TransportType, Is.EqualTo("Bus"));
+            await repo.SaveChangesAsync();
+        }
+
 
 
         [TearDown]

@@ -93,7 +93,6 @@ namespace AhmedovTravel.Tests.ServiceTests
         [Test]
         public async Task TestAddToCollectionThrowsNullExceptionWhenDestinationIdIsNull_Destination()
         {
-            //add transportr
             await repo.AddAsync(new User()
             {
                 UserName = "Testing",
@@ -263,8 +262,6 @@ namespace AhmedovTravel.Tests.ServiceTests
 
             Assert.That(x.Town, Is.EqualTo("Ahtopol"));
             await repo.SaveChangesAsync();
-
-
         }
 
         [Test]

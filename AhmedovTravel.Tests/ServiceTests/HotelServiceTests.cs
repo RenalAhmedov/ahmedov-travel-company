@@ -237,6 +237,42 @@ namespace AhmedovTravel.Tests.ServiceTests
             Assert.That(actual > expected);
         }
 
+        [Test]
+        public async Task TestShowCollection_Hotel()
+        {
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            await repo.AddAsync(new Hotel()
+            {
+                Name = "RenalHotel",
+                Description = "RenalDescription",
+                ImageUrl = "ASD1WSADA",
+                HotelRating = 6,
+                IsActive = true,
+                IsChosen = false
+            });
+            await repo.SaveChangesAsync();
+
+            var actualUserId = await data.Users.FirstAsync();
+            var actualHotelId = await data.Hotels.FirstAsync();
+
+            await hotelService.AddHotelToCollectionAsync(actualHotelId.Id, actualUserId.Id);
+            await repo.SaveChangesAsync();
+
+            var actualHotel = await hotelService.ShowHotelCollectionAsync(actualUserId.Id);
+            await repo.SaveChangesAsync();
+            var x = actualHotel.FirstOrDefault();
+
+            Assert.That(x.Name, Is.EqualTo("RenalHotel"));
+            await repo.SaveChangesAsync();
+        }
+
         [TearDown]
         public void TearDown()
         {

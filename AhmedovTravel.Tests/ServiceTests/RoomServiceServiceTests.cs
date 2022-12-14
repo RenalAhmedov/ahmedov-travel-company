@@ -140,6 +140,31 @@ namespace AhmedovTravel.Tests.ServiceTests
             Assert.That(actual > expected);
         }
 
+        [Test]
+        public async Task TestShowCollection_RoomService()
+        {
+            await repo.AddAsync(new User()
+            {
+                UserName = "Testing",
+                Email = "testingDestination@mail.com",
+                IsActive = true
+            });
+            await repo.SaveChangesAsync();
+
+            var actualUserId = await data.Users.FirstAsync();
+            var actualRoomService = await data.RoomServices.FirstAsync();
+
+            await roomServiceService.AddRoomServiceToCollectionAsync(actualRoomService.Id, actualUserId.Id);
+            await repo.SaveChangesAsync();
+
+            var actualHotel = await roomServiceService.ShowRoomServicetCollectionAsync(actualUserId.Id);
+            await repo.SaveChangesAsync();
+            var roomService = actualHotel.FirstOrDefault();
+
+            Assert.That(roomService.Description, Is.EqualTo("A Small Pizza, with small french fries and a bottle of Coca-Cola 350ml."));
+            await repo.SaveChangesAsync();
+        }
+
         [TearDown]
         public void TearDown()
         {
