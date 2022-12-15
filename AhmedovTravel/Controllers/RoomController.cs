@@ -1,4 +1,5 @@
-﻿using AhmedovTravel.Core.Contracts;
+﻿using AhmedovTravel.Core.Constants;
+using AhmedovTravel.Core.Contracts;
 using AhmedovTravel.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace AhmedovTravel.Controllers
             }
             catch (Exception)
             {
-                throw;
+                TempData[MessageConstants.ErrorMessage] = "You have a chosen room already.";
             }
 
             return RedirectToAction(nameof(ShowRoomCollection));
