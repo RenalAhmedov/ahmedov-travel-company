@@ -31,6 +31,7 @@ namespace AhmedovTravel.Controllers
             {
                 var userId = User.Id();
                 await destinationService.AddDestinationToCollectionAsync(destinationId, userId);
+                TempData[MessageConstants.SuccessMessage] = "Successfully added destination to watchlist.";
             }
             catch (Exception)
             {

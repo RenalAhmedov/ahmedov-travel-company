@@ -30,6 +30,7 @@ namespace AhmedovTravel.Controllers
             {
                 var userId = User.Id();
                 await hotelService.AddHotelToCollectionAsync(hotelId, userId);
+                TempData[MessageConstants.SuccessMessage] = "Successfully added hotel to watchlist.";
             }
             catch (Exception)
             {

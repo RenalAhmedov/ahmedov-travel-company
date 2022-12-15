@@ -31,6 +31,7 @@ namespace AhmedovTravel.Controllers
             {
                 var userId = User.Id();
                 await roomService.AddRoomToCollectionAsync(roomId, userId);
+                TempData[MessageConstants.SuccessMessage] = "Successfully added room to watchlist.";
             }
             catch (Exception)
             {

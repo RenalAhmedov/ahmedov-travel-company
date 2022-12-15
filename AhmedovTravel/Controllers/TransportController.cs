@@ -31,6 +31,7 @@ namespace AhmedovTravel.Controllers
             {
                 var userId = User.Id();
                 await transportService.AddTransportToCollectionAsync(transportId, userId);
+                TempData[MessageConstants.SuccessMessage] = "Successfully added transport to watchlist.";
             }
             catch (Exception)
             {
