@@ -1,4 +1,5 @@
-﻿using AhmedovTravel.Infrastructure.DataConstants;
+﻿using AhmedovTravel.Core.Constants;
+using AhmedovTravel.Infrastructure.DataConstants;
 using System.ComponentModel.DataAnnotations;
 
 namespace AhmedovTravel.Core.Models.Destination
@@ -9,12 +10,18 @@ namespace AhmedovTravel.Core.Models.Destination
 
         [Required]
         [StringLength(DestinationConstants.TitleMaxLength), MinLength(DestinationConstants.TitleMinLength)]
+        [RegularExpression(ValidationRegex.PropertyRegex,
+            ErrorMessage = "Contains unallowed characters")]
         public string Title { get; set; }
 
         [Required]
         [StringLength(DestinationConstants.TownNameMaxLength), MinLength(DestinationConstants.TownNameMinLength)]
+        [RegularExpression(ValidationRegex.PropertyRegex,
+            ErrorMessage = "Contains unallowed characters")]
         public string Town { get; set; }
 
+        [RegularExpression(ValidationRegex.DescriptionAndMessageRegex,
+            ErrorMessage = "Contains unallowed characters")]
         public string ImageUrl { get; set; }
 
         [Required]

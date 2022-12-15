@@ -1,4 +1,5 @@
-﻿using AhmedovTravel.Infrastructure.Data.Entities;
+﻿using AhmedovTravel.Core.Constants;
+using AhmedovTravel.Infrastructure.Data.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace AhmedovTravel.Core.Models.Room
@@ -11,6 +12,8 @@ namespace AhmedovTravel.Core.Models.Room
         public int Persons { get; set; }
 
         [Required]
+        [RegularExpression(ValidationRegex.DescriptionAndMessageRegex,
+            ErrorMessage = "Contains unallowed characters")]
         public string ImageUrl { get; set; }
 
         [Required]
