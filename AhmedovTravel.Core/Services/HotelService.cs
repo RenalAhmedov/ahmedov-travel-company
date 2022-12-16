@@ -39,7 +39,7 @@ namespace AhmedovTravel.Core.Services
         /// <param name="hotelId">Hotel Id</param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException">Throws if the given User doesn't exist</exception>
-        /// <exception cref="ArgumentException">Throws if the user's Hotel collection has 1 or more destinations inside.</exception>
+        /// <exception cref="ArgumentException">Throws if the user's Hotel collection has 1 or more hotels inside.</exception>
         /// <exception cref="NullReferenceException">Throws if the given Hotel doesn't exist</exception>
         public async Task AddHotelToCollectionAsync(int hotelId, string userId)
         {
