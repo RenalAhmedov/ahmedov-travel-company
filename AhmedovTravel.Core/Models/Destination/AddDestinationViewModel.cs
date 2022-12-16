@@ -7,16 +7,18 @@ namespace AhmedovTravel.Core.Models.Destination
     public class AddDestinationViewModel
     {
         [Required]
-        [StringLength(DestinationConstants.TitleMaxLength), MinLength(DestinationConstants.TitleMinLength)]
+        [StringLength(DestinationConstants.TitleMaxLength, MinimumLength = DestinationConstants.TitleMinLength,
+            ErrorMessage = "The Title field must be between 5 and 50 characters.")]
         [RegularExpression(ValidationRegex.PropertyRegex,
             ErrorMessage = "Contains unallowed characters")]
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
         [Required]
-        [StringLength(DestinationConstants.TownNameMaxLength), MinLength(DestinationConstants.TownNameMinLength)]
+        [StringLength(DestinationConstants.TownNameMaxLength, MinimumLength = DestinationConstants.TownNameMinLength,
+             ErrorMessage = "The Town field must be between 4 and 100 characters.")]
         [RegularExpression(ValidationRegex.PropertyRegex,
             ErrorMessage = "Contains unallowed characters")]
-        public string Town { get; set; }
+        public string Town { get; set; } = null!;
 
         [Required]
         [RegularExpression(ValidationRegex.DescriptionAndMessageRegex,
@@ -24,7 +26,7 @@ namespace AhmedovTravel.Core.Models.Destination
         public string ImageUrl { get; set; } = null!;
 
         [Required]
-        [Range(typeof(decimal), "0.0", "10.0", ConvertValueInInvariantCulture = true)]
+        [Range(typeof(decimal), "1.0", "10.0", ConvertValueInInvariantCulture = true)]
         public decimal Rating { get; set; }
 
         [Required]

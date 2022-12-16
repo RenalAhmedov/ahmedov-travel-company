@@ -28,7 +28,7 @@
                 <span asp-validation-for="PricePerNight" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RoomTypeId"></label>
+                <label asp-for="RoomTypeId">RoomType</label>
                 <select asp-for="RoomTypeId" class="form-control">
                     @foreach (var roomtype in Model.RoomTypes)
                     {

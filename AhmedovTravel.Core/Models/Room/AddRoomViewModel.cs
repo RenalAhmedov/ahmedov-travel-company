@@ -13,7 +13,7 @@ namespace AhmedovTravel.Core.Models.Room
         [Required]
         [RegularExpression(ValidationRegex.DescriptionAndMessageRegex,
             ErrorMessage = "Contains unallowed characters")]
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = null!;
 
         [Required]
         [Range(typeof(decimal), "15.00", "200.0", ConvertValueInInvariantCulture = true)]
