@@ -101,7 +101,7 @@ namespace AhmedovTravel.Core.Services
 
 
         /// <summary>
-        /// Gets Id and Name for all active departments in the database
+        /// Gets Id and Name for all active Destinations in the database
         /// </summary>
         /// <returns><AllDestinationsViewModel></returns>
         public async Task<AllDestinationsViewModel> DestinationDetailsById(int id)
@@ -127,7 +127,7 @@ namespace AhmedovTravel.Core.Services
         /// </summary>
         /// <param name="model">Model with the Edit data</param>
         /// <returns></returns>
-        /// <exception cref="NullReferenceException">Throws if the given Department doesn't exist</exception>
+        /// <exception cref="NullReferenceException">Throws if the given Destination doesn't exist</exception>
         public async Task Edit(int destinationId, EditDestinationViewModel model)
         {
             var destination = await repo.GetByIdAsync<Destination>(destinationId);
