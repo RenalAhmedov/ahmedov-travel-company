@@ -126,7 +126,7 @@ namespace AhmedovTravel.Core.Services
         /// <summary>
         /// Gets all active rooms in the database
         /// </summary>
-        /// <returns>IEnumerable<RoomViewModel> hotels</returns>
+        /// <returns>IEnumerable<RoomViewModel> rooms</returns>
         public async Task<IEnumerable<RoomViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Room>()

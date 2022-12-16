@@ -15,6 +15,14 @@ namespace AhmedovTravel.Core.Services
             repo = _repo;
         }
 
+        /// <summary>
+        /// Adds the transport to the user's collection 
+        /// </summary>
+        /// <param name="transportId">Transport Id</param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException">Throws if the given User doesn't exist</exception>
+        /// <exception cref="ArgumentException">Throws if the user's Transport collection has 1 or more transports inside.</exception>
+        /// <exception cref="NullReferenceException">Throws if the given Transport doesn't exist</exception>
         public async Task AddTransportToCollectionAsync(int transportId, string userId)
         {
             var user = await repo.All<User>()
@@ -51,6 +59,10 @@ namespace AhmedovTravel.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Gets all active transports in the database
+        /// </summary>
+        /// <returns>IEnumerable<TransportViewModel> transports</returns>
         public async Task<IEnumerable<TransportViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Transport>()
@@ -66,6 +78,12 @@ namespace AhmedovTravel.Core.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Removes a given transport from the user's collection
+        /// </summary>
+        /// <param name="transportId">Transport Id</param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException">Throws if the given Transport doesn't exist.</exception>
         public async Task RemoveTransportFromCollectionAsync(int transportId, string userId)
         {
             var user = await repo.All<User>()
@@ -88,6 +106,11 @@ namespace AhmedovTravel.Core.Services
             }
         }
 
+        /// <summary>
+        /// Shows the user's transport collection
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException">Throws if the given User doesn't exist.</exception>
         public async Task<IEnumerable<TransportViewModel>> ShowTransportCollectionAsync(string userId)
         {
             var user = await repo.All<User>()
