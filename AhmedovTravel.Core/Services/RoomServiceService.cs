@@ -15,6 +15,14 @@ namespace AhmedovTravel.Core.Services
             repo = _repo;
         }
 
+        /// <summary>
+        /// Adds the room service to the user's collection 
+        /// </summary>
+        /// <param name="roomServiceId">RoomService Id</param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException">Throws if the given User doesn't exist</exception>
+        /// <exception cref="ArgumentException">Throws if the user's RoomService collection has 1 or more RoomServices inside.</exception>
+        /// <exception cref="NullReferenceException">Throws if the given RoomService doesn't exist</exception>
         public async Task AddRoomServiceToCollectionAsync(int roomServiceId, string userId)
         {
             var user = await repo.All<User>()
@@ -51,6 +59,10 @@ namespace AhmedovTravel.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Gets all active RoomServices in the database
+        /// </summary>
+        /// <returns>IEnumerable<RoomServiceViewModel> RoomServices</returns>
         public async Task<IEnumerable<RoomServiceViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Infrastructure.Data.Entities.RoomService>()
@@ -66,6 +78,12 @@ namespace AhmedovTravel.Core.Services
                .ToListAsync();
         }
 
+        /// <summary>
+        /// Removes a given room service from the user's collection
+        /// </summary>
+        /// <param name="roomServiceId">RoomService Id</param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException">Throws if the given RoomService doesn't exist.</exception>
         public async Task RemoveRoomServiceFromCollectionAsync(int roomServiceId, string userId)
         {
             var user = await repo.All<User>()
@@ -88,6 +106,11 @@ namespace AhmedovTravel.Core.Services
             }
         }
 
+        /// <summary>
+        /// Shows the user's roomservice collection
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException">Throws if the given User doesn't exist.</exception>
         public async Task<IEnumerable<RoomServiceViewModel>> ShowRoomServicetCollectionAsync(string userId)
         {
             var user = await repo.All<User>()
