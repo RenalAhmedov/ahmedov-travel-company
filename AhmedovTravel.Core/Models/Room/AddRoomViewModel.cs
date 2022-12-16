@@ -1,6 +1,5 @@
 ﻿using AhmedovTravel.Core.Constants;
 using AhmedovTravel.Infrastructure.Data.Entities;
-using AhmedovTravel.Infrastructure.DataConstants;
 using System.ComponentModel.DataAnnotations;
 
 namespace AhmedovTravel.Core.Models.Room
