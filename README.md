@@ -8,7 +8,9 @@ Admins can Add/Edit/Delete Destinations, Rooms and Hotels, and manage the admin 
 
 ## Admin Panel
 You can login with admin account:
+
 Email: admin@mail.com
+
 Password: Admin123!
 
 The Admin panel is accessible for users that are in admin role.
